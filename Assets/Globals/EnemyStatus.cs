@@ -5,10 +5,14 @@ using UnityEngine;
 public class EnemyStatus
 {
 
-    public static int Health { get; set; }
+    public static int ShipHealthMax { get; set; }
 
-    public static int Ammo { get; set; }
+    public static int ShipHealthCurrent { get; set; }
 
-    public static int Gold { get; set; }
+    public static int GoldCount { get; set; }
+
+    public static int ResourcesCount { get; set; }
+
+    public static int AmmoCount { get; set; }
 
 }
