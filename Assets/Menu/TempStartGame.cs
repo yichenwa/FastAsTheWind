@@ -15,7 +15,7 @@ public class TempStartGame : MonoBehaviour {
         PlayerStatus.ShipPos = new Vector3(0, 0, 0);
         PlayerStatus.ShipHealthMax = 100;
         PlayerStatus.ShipHealthCurrent = 100;
-        PlayerStatus.AmmoCount = 20;
+        PlayerStatus.AmmoCount = 19;
 
         SceneManager.LoadScene(worldMapIndex);
     }

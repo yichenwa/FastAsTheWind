@@ -29,7 +29,16 @@ public class PlayerController : MonoBehaviour {
     private bool moveLock;
     private bool isVisiting;
 
-	void Start ()
+    public void ReturnToMap(int goldReward, int resourcesReward, Vector3 returnPos) //if returnPos is the same location the ship was in before, pass in PlayerStatus.ShipPos
+    {
+        PlayerStatus.GoldCount += goldReward;
+        PlayerStatus.ResourcesCount += resourcesReward;
+        PlayerStatus.ShipPos = returnPos;
+
+        SceneManager.LoadScene(1);
+    }
+
+    void Start ()
     {
         player = GetComponent<Rigidbody2D>();
 
@@ -46,7 +55,8 @@ public class PlayerController : MonoBehaviour {
         SetResources();
         SetGold();
 
-	}
+        PlayerStatus.PlayerControllerRef = (PlayerController)gameObject.GetComponent(typeof(PlayerController));
+    }
 
     private void Update()
     {
@@ -56,7 +66,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void FixedUpdate ()
+    private void FixedUpdate ()
     {
         float horVel = Input.GetAxis("Horizontal");
         float verVel = Input.GetAxis("Vertical");
@@ -74,7 +84,6 @@ public class PlayerController : MonoBehaviour {
             if ((depletionCounter == depletionRate) && !moveLock)
             {
                 PlayerStatus.ResourcesCount--;
-                SetResources();
                 depletionCounter = 0;
             }
 
@@ -84,15 +93,18 @@ public class PlayerController : MonoBehaviour {
             if (rand > 1 - chanceHolder)
             {
                 chanceHolder = encounterChance;
-                SceneManager.LoadScene(battleSceneIndex);
+                //SceneManager.LoadScene(battleSceneIndex);
             }
             else chanceHolder += .0001f;
         }
 
         PlayerStatus.ShipPos = transform.position;
+
+        SetGold();
+        SetResources();
     }
 
-    void SetResources()
+    private void SetResources()
     {
         resourcesCount.text = "Resources: " + PlayerStatus.ResourcesCount.ToString();
 
@@ -104,7 +116,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void SetGold()
+    private void SetGold()
     {
         goldCount.text = "Gold: " + PlayerStatus.GoldCount.ToString();
     }

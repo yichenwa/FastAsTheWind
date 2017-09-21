@@ -18,5 +18,6 @@ public class PlayerStatus
     public static Vector3 ShipPos { get; set; }
 
     public static IslandAttributes VisitingIsland { get; set; }
+    public static PlayerController PlayerControllerRef { get; set; }
 
 }
