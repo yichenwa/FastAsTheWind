@@ -47,6 +47,7 @@ public class CombatState : MonoBehaviour {
         test2.enemy.shipHealth = test2.enemy.shipHealth - test.cannon.weaponAttack;
         if (test2.enemy.shipHealth <= 0) {
             Destroy(input.targetObject);
+            enemy.Remove(input.targetObject);
         }
     }
 
@@ -58,6 +59,7 @@ public class CombatState : MonoBehaviour {
         if (test2.player.shipHealth <= 0)
         {
             Destroy(input.targetObject);
+            player.Remove(input.targetObject);
         }
     }
 }
