@@ -50,7 +50,12 @@ public class PlayerShipState : MonoBehaviour
                 advanceCooldown();
                 break;
             case States.QUEUE:
-                attackTarget();
+                if(CSM.enemy.Count > 0)
+                    attackTarget();
+                else
+                {
+                    currentState = States.DEAD;
+                }
                 break;
             case States.SELECTING:
                 break;

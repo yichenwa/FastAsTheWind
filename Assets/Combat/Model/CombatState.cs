@@ -39,12 +39,16 @@ public class CombatState : MonoBehaviour {
         actions.Enqueue(input);
     }
 
-    //Does damage to enemy or player. 
+    //Does damage to enemy or player. Destroy target if health is reduced to 0 or less.
     void PlayerDoDamage(Turns input)
     {
         PlayerShipState test = input.attackerObject.GetComponent<PlayerShipState>();
         EnemyShipState test2 = input.targetObject.GetComponent<EnemyShipState>();
         test2.enemy.shipHealth = test2.enemy.shipHealth - test.cannon.weaponAttack;
+        if (test2.enemy.shipHealth <= 0) {
+            Destroy(input.targetObject);
+            enemy.Remove(input.targetObject);
+        }
     }
 
     void EnemyDoDamage(Turns input)
@@ -52,5 +56,10 @@ public class CombatState : MonoBehaviour {
         EnemyShipState test = input.attackerObject.GetComponent<EnemyShipState>();
         PlayerShipState test2 = input.targetObject.GetComponent<PlayerShipState>();
         test2.player.shipHealth = test2.player.shipHealth - test.cannon.weaponAttack;
+        if (test2.player.shipHealth <= 0)
+        {
+            Destroy(input.targetObject);
+            player.Remove(input.targetObject);
+        }
     }
 }

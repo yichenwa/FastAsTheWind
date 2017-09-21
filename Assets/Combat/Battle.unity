@@ -146,7 +146,7 @@ MonoBehaviour:
     weaponCost: 50
     weaponCooldown: 2
     currentCooldown: 0
-    weaponAttack: 1
+    weaponAttack: 59
   currentState: 0
 --- !u!23 &182391794
 MeshRenderer:
@@ -422,9 +422,9 @@ MonoBehaviour:
   cannon:
     weaponName: Cannon
     weaponCost: 5
-    weaponCooldown: 5
+    weaponCooldown: 3
     currentCooldown: 0
-    weaponAttack: 5
+    weaponAttack: 10
   currentState: 0
 --- !u!1 &671535708
 GameObject:
