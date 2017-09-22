@@ -5,21 +5,44 @@ using UnityEngine.UI;
 
 public class ViewScript : MonoBehaviour {
 
+    public Text textPlayerShip;
+    public Text textPlayerHealth;
+    public Text textEnemyShip;
+    public Text textEnemyHealth;
     public Text textCombatLog; // points to Combat/Canvas/TextCombatLog
     private string[] combatLogBuffer; // a buffer to track what's displayed in the combat log.
     private int combatLogSize; // how many lines can fit into the combat log
 
     // Use this for initialization
     void Start () {
+
+        RefreshPlayerStatDisplay();
+        RefreshEnemyStatDisplay();
+
         textCombatLog.text = "";
         combatLogSize = 6;
         combatLogBuffer = new string[combatLogSize];
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-		//TODO: update the UI to match global variables
-	}
+        //TODO: update the UI to match global variables
+        RefreshPlayerStatDisplay();
+        RefreshEnemyStatDisplay();
+
+    }
+
+    void RefreshPlayerStatDisplay() {
+        textPlayerShip.text = "Allied Ship: FTL";
+        textPlayerHealth.text = "HP: " + PlayerStatus.ShipHealthCurrent.ToString() + "/" + PlayerStatus.ShipHealthMax.ToString();
+    }
+
+    void RefreshEnemyStatDisplay()
+    {
+        textEnemyShip.text = "Enemy Ship: Boat";
+        textEnemyHealth.text = "HP: " + EnemyStatus.ShipHealthCurrent.ToString() + "/" + EnemyStatus.ShipHealthMax.ToString();
+    }
 
     public void printToCombatLog(string line)
     {

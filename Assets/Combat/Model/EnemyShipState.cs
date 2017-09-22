@@ -26,6 +26,11 @@ public class EnemyShipState : MonoBehaviour {
 
     void Start()
     {
+        EnemyStatus.ShipHealthMax = 50; // DEBUG LINES DELETE
+        EnemyStatus.ShipHealthCurrent = 50; // DEBUG LINES DELETE
+
+        // determine enemy ship health from world map
+        enemy.shipHealth = EnemyStatus.ShipHealthCurrent;
         currentState = States.PROCESSING;
         CSM = GameObject.Find("Combat Manager").GetComponent<CombatState>();
 
@@ -33,6 +38,7 @@ public class EnemyShipState : MonoBehaviour {
 
     void Update()
     {
+        EnemyStatus.ShipHealthCurrent = (int)enemy.shipHealth;
 
         //Debug.Log(currentState);
 

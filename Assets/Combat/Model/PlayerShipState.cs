@@ -29,6 +29,11 @@ public class PlayerShipState : MonoBehaviour
 
     void Start()
     {
+        PlayerStatus.ShipHealthMax = 100; // DEBUG LINES DELETE
+        PlayerStatus.ShipHealthCurrent = 100; // DEBUG LINES DELETE
+
+        // determine player ship health from world map
+        player.shipHealth = PlayerStatus.ShipHealthCurrent;
         // First state where the weapon will count up until it can be used. Subject to change of course.
         currentState = States.PROCESSING;
 
@@ -37,7 +42,7 @@ public class PlayerShipState : MonoBehaviour
 
     void Update()
     {
-
+        PlayerStatus.ShipHealthCurrent = (int)player.shipHealth;
         //Debug.Log(currentState);
 
         //Switch case for the weapon states.
@@ -50,12 +55,8 @@ public class PlayerShipState : MonoBehaviour
                 advanceCooldown();
                 break;
             case States.QUEUE:
-                if(CSM.enemy.Count > 0)
-                    attackTarget();
-                else
-                {
+                if(CSM.enemy.Count == 0)
                     currentState = States.DEAD;
-                }
                 break;
             case States.SELECTING:
                 break;
@@ -79,11 +80,11 @@ public class PlayerShipState : MonoBehaviour
         }
     }
 
-    //When the weapon is in queue state, it will run attackTarget. 
+    //tells player ship to make an attack. returns true if attack is made, false if on cooldown 
 
-    void attackTarget() {
+    public void attackTarget() {
         //Create a new "Turn"
-        //Gets attacker Objets and target Objects from Combat State CSM. 
+        //Gets attacker Objets and target Objects from Combat State CSM.    
         Turns basicAttack = new Turns();
         basicAttack.attackerName = player.shipName;
         basicAttack.attackerObject = CSM.player[0];
@@ -93,6 +94,11 @@ public class PlayerShipState : MonoBehaviour
         //Reset cooldown and state/
         cannon.currentCooldown = 0f;
         currentState = States.PROCESSING;
-        
     }
+
+    public bool canFire() // returns true if allowed to attack
+    {
+        return (currentState == States.QUEUE);
+    }
+
 }
