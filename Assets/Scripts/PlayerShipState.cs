@@ -10,6 +10,9 @@ public class PlayerShipState : MonoBehaviour
     //Gets the weapon stats.
     public BaseWeapon cannon;
 
+    //Gets a crew member.
+    public BaseCrew captain;
+
     //For list of player ships and enemy ships and action queue.
     private CombatState CSM;
 

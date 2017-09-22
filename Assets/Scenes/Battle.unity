@@ -147,6 +147,9 @@ MonoBehaviour:
     weaponCooldown: 2
     currentCooldown: 0
     weaponAttack: 59
+  captain:
+    name: Bob
+    health: 40
   currentState: 0
 --- !u!23 &182391794
 MeshRenderer:
@@ -358,6 +361,9 @@ MonoBehaviour:
     weaponCooldown: 3
     currentCooldown: 0
     weaponAttack: 10
+  captain:
+    name: John
+    health: 20
   currentState: 0
 --- !u!1 &1431649733
 GameObject:
