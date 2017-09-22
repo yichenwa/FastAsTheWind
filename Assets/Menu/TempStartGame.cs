@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class TempStartGame : MonoBehaviour {
 
-    public int worldMapIndex;
-
 	// Use this for initialization
 	public void OnClickStartGame()
     {
@@ -17,6 +15,6 @@ public class TempStartGame : MonoBehaviour {
         PlayerStatus.ShipHealthCurrent = 100;
         PlayerStatus.AmmoCount = 19;
 
-        SceneManager.LoadScene(worldMapIndex);
+        SceneManager.LoadScene(SceneIndexes.WorldMap());
     }
 }
