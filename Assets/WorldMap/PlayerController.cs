@@ -29,13 +29,13 @@ public class PlayerController : MonoBehaviour {
     private bool moveLock;
     private bool isVisiting;
 
-    public void ReturnToMap(int goldReward, int resourcesReward, Vector3 returnPos) //if returnPos is the same location the ship was in before, pass in PlayerStatus.ShipPos
+    public static void ReturnToMap(int goldReward, int resourcesReward, Vector3 returnPos) //if returnPos is the same location the ship was in before, pass in PlayerStatus.ShipPos
     {
         PlayerStatus.GoldCount += goldReward;
         PlayerStatus.ResourcesCount += resourcesReward;
         PlayerStatus.ShipPos = returnPos;
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneIndexes.WorldMap());
     }
 
     void Start ()
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
     {
         if((Input.GetButton("Submit")) && isVisiting)
         {
-            SceneManager.LoadScene(visitationSceneIndex);
+            SceneManager.LoadScene(SceneIndexes.IslandVisitation());
         }
     }
 
@@ -93,7 +93,11 @@ public class PlayerController : MonoBehaviour {
             if (rand > 1 - chanceHolder)
             {
                 chanceHolder = encounterChance;
-                //SceneManager.LoadScene(battleSceneIndex);
+                EnemyStatus.ShipHealthMax = 50;
+                EnemyStatus.ShipHealthCurrent = 50;
+                EnemyStatus.GoldCount = 50;
+                EnemyStatus.ResourcesCount = 20;
+                SceneManager.LoadScene(SceneIndexes.Combat());
             }
             else chanceHolder += .0001f;
         }

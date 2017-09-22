@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ControlScript : MonoBehaviour {
 
@@ -34,7 +35,10 @@ public class ControlScript : MonoBehaviour {
 
     public void buttonEndPressed()
     { // called when ButtonEnd is pressed in the UI
-        
+        if (combatState.playerWon)
+            PlayerController.ReturnToMap(EnemyStatus.GoldCount, EnemyStatus.ResourcesCount, PlayerStatus.ShipPos);
+        else
+            PlayerController.ReturnToMap(-1 * PlayerStatus.GoldCount / 2, -1 * PlayerStatus.ResourcesCount / 2, PlayerStatus.ShipPos);
     }
 
 

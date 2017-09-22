@@ -26,9 +26,6 @@ public class EnemyShipState : MonoBehaviour {
 
     void Start()
     {
-        EnemyStatus.ShipHealthMax = 50; // DEBUG LINES DELETE
-        EnemyStatus.ShipHealthCurrent = 50; // DEBUG LINES DELETE
-
         // determine enemy ship health from world map
         enemy.shipHealth = EnemyStatus.ShipHealthCurrent;
         currentState = States.PROCESSING;
