@@ -7,6 +7,7 @@ public class IslandAttributes : MonoBehaviour
 {
 
     public string islandName;
+    public int islandID;
     public bool hasBlacksmith;
     public bool hasGunsmith;
     public bool hasTavern;
@@ -16,6 +17,11 @@ public class IslandAttributes : MonoBehaviour
 
     private bool isDiscovered;
 
+    public void SetAttributes(string name, bool blackS, bool gunS, bool tav, bool wardS, bool arch, bool special)
+    {
+        islandName = name; hasBlacksmith = blackS; hasGunsmith = gunS; hasTavern = tav;
+        hasWardsmith = wardS; hasArchetier = arch; hasSpecial = special;
+    }
 
     public void SetDiscovered()
     {
@@ -36,7 +42,8 @@ public class IslandAttributes : MonoBehaviour
     void Start ()
     {
         isDiscovered = false;
-	}
+        transform.position = IslandStats.IslandLocations[islandID];
+    }
 	
 	// Update is called once per frame
 	void Update ()

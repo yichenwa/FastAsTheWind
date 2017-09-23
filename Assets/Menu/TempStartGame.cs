@@ -15,6 +15,8 @@ public class TempStartGame : MonoBehaviour {
         PlayerStatus.ShipHealthCurrent = 100;
         PlayerStatus.AmmoCount = 19;
 
+        IslandStats.IslandLocations = GetComponent<IslandGeneration>().generateIslands();
+
         SceneManager.LoadScene(SceneIndexes.WorldMap());
     }
 }
