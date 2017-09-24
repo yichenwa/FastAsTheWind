@@ -7,6 +7,7 @@ public class ViewScript : MonoBehaviour {
 
     public Text textPlayerShip;
     public Text textPlayerHealth;
+    public Text textPlayerAmmo;
     public Text textEnemyShip;
     public Text textEnemyHealth;
     public Text textCombatLog; // points to Combat/Canvas/TextCombatLog
@@ -36,6 +37,7 @@ public class ViewScript : MonoBehaviour {
     void RefreshPlayerStatDisplay() {
         textPlayerShip.text = "Allied Ship: FTL";
         textPlayerHealth.text = "HP: " + PlayerStatus.ShipHealthCurrent.ToString() + "/" + PlayerStatus.ShipHealthMax.ToString();
+        textPlayerAmmo.text = "Ammo: " + PlayerStatus.AmmoCount.ToString();
     }
 
     void RefreshEnemyStatDisplay()
