@@ -96,7 +96,7 @@ public class PlayerShipState : MonoBehaviour
 
     public bool canFire() // returns true if allowed to attack
     {
-        return (currentState == States.QUEUE);
+        return (currentState == States.QUEUE && PlayerStatus.AmmoCount>0);
     }
 
 }
