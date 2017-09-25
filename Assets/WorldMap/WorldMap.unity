@@ -301,6 +301,11 @@ Prefab:
       propertyPath: m_Name
       value: A Good Town
       objectReference: {fileID: 0}
+    - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
+        type: 2}
+      propertyPath: hasSpecial
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd26f61f348864745a440a595204b04d, type: 2}
   m_IsPrefabParent: 0
