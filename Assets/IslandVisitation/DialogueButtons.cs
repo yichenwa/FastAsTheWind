@@ -27,6 +27,7 @@ public class DialogueButtons : MonoBehaviour {
 
     private void OnClick()
     {
+        DialogueEventHandler.CallMethods(indicatedAction);
         manager.Setup(nextSet--);
     }
 }
