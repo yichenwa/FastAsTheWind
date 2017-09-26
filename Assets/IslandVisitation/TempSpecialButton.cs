@@ -37,6 +37,10 @@ public class TempSpecialButton : MonoBehaviour
 
         manager.SetUpDialogue(dScriptPath);
 
+        DialoguePanelManager dpm = dialoguePanel.GetComponent<DialoguePanelManager>();
+        dpm.currentScript = DialogueManager.dScript;
+
         dialoguePanel.SetActive(true);
+        dpm.Setup(0);
     }
 }

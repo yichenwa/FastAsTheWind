@@ -10,22 +10,22 @@ public class DialoguePanelManager : MonoBehaviour
     public Text interactionsText;
     public GameObject mainPanel;
 
+    public DialogueScript currentScript;
+
     private int currentSet;
-    private DialogueScript currentScript;
 
-	// Use this for initialization
-	void Start ()
+    void Start()
     {
-        currentScript = DialogueManager.dScript;
+        //currentScript = DialogueManager.dScript;
 
-        Setup(0);
-	}
+        //Setup(0);
+    }
 
     void OnEnable()
     {
-        currentScript = DialogueManager.dScript;
+        //currentScript = DialogueManager.dScript;
 
-        Setup(0);
+        //Setup(0);
     }
 
     public void Setup(int setNum)
@@ -35,9 +35,9 @@ public class DialoguePanelManager : MonoBehaviour
         {
             if (child.CompareTag("ToDestroy")) GameObject.Destroy(child.gameObject);
         }
-
-
-        if (setNum == currentScript.dialogueSets.Length) //If the conclude-dialogue button is pressed, will close the dialogue panel and return to menu
+        
+        
+        if ((setNum == currentScript.dialogueSets.Length)) //If the conclude-dialogue button is pressed, will close the dialogue panel and return to menu
         {
             gameObject.SetActive(false);
             mainPanel.SetActive(true);
@@ -46,7 +46,6 @@ public class DialoguePanelManager : MonoBehaviour
 
             return;
         }
-
         interactionsText.text = currentScript.GetSetDialogue(setNum); //Set interactions panel text to the correct dialogue for the current set
 
         for (int i = 0; i < currentScript.GetSetSize(setNum); i++)
