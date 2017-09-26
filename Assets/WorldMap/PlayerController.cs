@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour {
 
 
     private Rigidbody2D player;
-    private Vector3 startingPos = new Vector3(0, 0, 0);
 
     private int depletionCounter; //lower = faster
     private float chanceHolder;
