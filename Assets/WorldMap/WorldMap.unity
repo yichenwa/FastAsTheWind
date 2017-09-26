@@ -149,12 +149,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1603736624845712, guid: dd26f61f348864745a440a595204b04d, type: 2}
       propertyPath: m_Name
-      value: Name are Hard
+      value: Town 3
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
       propertyPath: islandName
-      value: Names are Hard
+      value: Town 3
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
@@ -164,12 +164,12 @@ Prefab:
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
       propertyPath: hasGunsmith
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
       propertyPath: hasTavern
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
@@ -300,11 +300,11 @@ Prefab:
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
       propertyPath: islandName
-      value: A Good Town
+      value: Town 1
       objectReference: {fileID: 0}
     - target: {fileID: 1603736624845712, guid: dd26f61f348864745a440a595204b04d, type: 2}
       propertyPath: m_Name
-      value: A Good Town
+      value: Town 1
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
@@ -993,7 +993,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1603736624845712, guid: dd26f61f348864745a440a595204b04d, type: 2}
       propertyPath: m_Name
-      value: A Great Name
+      value: Town 2
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
@@ -1003,7 +1003,7 @@ Prefab:
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
       propertyPath: islandName
-      value: A Great Name
+      value: Town 2
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}

@@ -87,6 +87,7 @@ public class PlayerShipState : MonoBehaviour
         basicAttack.attackerObject = CSM.player[0];
         basicAttack.targetObject = CSM.enemy[0];
         //Add to the attack queue.
+        PlayerStatus.AmmoCount = PlayerStatus.AmmoCount - 1;
         CSM.Add(basicAttack);
         //Reset cooldown and state/
         cannon.currentCooldown = 0f;
@@ -95,7 +96,7 @@ public class PlayerShipState : MonoBehaviour
 
     public bool canFire() // returns true if allowed to attack
     {
-        return (currentState == States.QUEUE);
+        return (currentState == States.QUEUE && PlayerStatus.AmmoCount>0);
     }
 
 }
