@@ -34,7 +34,7 @@ public class TempSpecialButton : MonoBehaviour
     private void OnClick()
     {
         mainPanel.gameObject.SetActive(false);
-
+        
         manager.SetUpDialogue(dScriptPath);
 
         DialoguePanelManager dpm = dialoguePanel.GetComponent<DialoguePanelManager>();

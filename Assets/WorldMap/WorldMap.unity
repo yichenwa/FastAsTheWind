@@ -164,16 +164,31 @@ Prefab:
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
       propertyPath: hasGunsmith
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
       propertyPath: hasTavern
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
       propertyPath: hasSpecial
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
+        type: 2}
+      propertyPath: hasArchetier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
+        type: 2}
+      propertyPath: hasWardsmith
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
+        type: 2}
+      propertyPath: hasBlacksmith
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -311,7 +326,13 @@ Prefab:
       propertyPath: hasSpecial
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
+        type: 2}
+      propertyPath: hasTavern
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: dd26f61f348864745a440a595204b04d, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &409909695 stripped
@@ -319,6 +340,31 @@ Transform:
   m_PrefabParentObject: {fileID: 4068861585536764, guid: dd26f61f348864745a440a595204b04d,
     type: 2}
   m_PrefabInternal: {fileID: 409909694}
+--- !u!1 &409909696 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1603736624845712, guid: dd26f61f348864745a440a595204b04d,
+    type: 2}
+  m_PrefabInternal: {fileID: 409909694}
+--- !u!114 &409909697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 409909696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128179e8242e1924da615c6384bc51f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  islandName: Quest Town 1
+  islandID: 0
+  hasBlacksmith: 1
+  hasGunsmith: 1
+  hasTavern: 1
+  hasWardsmith: 1
+  hasArchetier: 1
+  hasSpecial: 0
+  specialAttributes: {fileID: 0}
 --- !u!1 &589394450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,6 +1059,26 @@ Prefab:
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
       propertyPath: hasSpecial
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
+        type: 2}
+      propertyPath: hasBlacksmith
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
+        type: 2}
+      propertyPath: hasTavern
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
+        type: 2}
+      propertyPath: hasWardsmith
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
+        type: 2}
+      propertyPath: hasArchetier
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

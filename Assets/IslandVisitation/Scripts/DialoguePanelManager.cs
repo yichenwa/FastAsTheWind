@@ -40,7 +40,7 @@ public class DialoguePanelManager : MonoBehaviour
         if ((setNum == currentScript.dialogueSets.Length)) //If the conclude-dialogue button is pressed, will close the dialogue panel and return to menu
         {
             gameObject.SetActive(false);
-            mainPanel.SetActive(true);
+            PlayerStatus.VisitingIsland.GetActivePanel().SetActive(true);
 
             interactionsText.text = "Where to next, captain?";
 
