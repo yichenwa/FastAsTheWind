@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour {
 
         if((horVel != 0) || (verVel != 0))
         {
-            depletionCounter++;
+            depletionCounter++; //Deplete resources
             if ((depletionCounter == depletionRate) && !moveLock)
             {
                 PlayerStatus.ResourcesCount--;
@@ -89,16 +89,16 @@ public class PlayerController : MonoBehaviour {
             
             float rand = Random.value;
 
-            if (rand > 1 - chanceHolder)
+            if (rand > 1 - chanceHolder) //Check for random encounter
             {
-                chanceHolder = encounterChance;
+                chanceHolder = .0001f;
                 EnemyStatus.ShipHealthMax = 50;
                 EnemyStatus.ShipHealthCurrent = 50;
                 EnemyStatus.GoldCount = 50;
                 EnemyStatus.ResourcesCount = 20;
                 SceneManager.LoadScene(SceneIndexes.Combat());
             }
-            else chanceHolder += .0001f;
+            else chanceHolder += encounterChance;
         }
 
         PlayerStatus.ShipPos = transform.position;

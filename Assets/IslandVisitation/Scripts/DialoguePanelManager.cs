@@ -14,22 +14,23 @@ public class DialoguePanelManager : MonoBehaviour
 
     private int currentSet;
 
-    void Start()
-    {
-        //currentScript = DialogueManager.dScript;
+    //void Start()
+    //{
+    //    currentScript = DialogueManager.dScript;
 
-        //Setup(0);
-    }
+    //    Setup(0);
+    //}
 
-    void OnEnable()
-    {
-        //currentScript = DialogueManager.dScript;
+    //void OnEnable()
+    //{
+    //    currentScript = DialogueManager.dScript;
 
-        //Setup(0);
-    }
+    //    Setup(0);
+    //}
 
     public void Setup(int setNum)
     {
+        if (currentScript == null) currentScript = DialogueManager.dScript;
 
         foreach (Transform child in dialoguePanel.transform) //Reset the panel
         {
@@ -42,7 +43,7 @@ public class DialoguePanelManager : MonoBehaviour
             gameObject.SetActive(false);
             PlayerStatus.VisitingIsland.GetActivePanel().SetActive(true);
 
-            interactionsText.text = "Where to next, captain?";
+            interactionsText.text = "";
 
             return;
         }

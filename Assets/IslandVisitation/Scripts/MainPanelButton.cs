@@ -16,11 +16,16 @@ public class MainPanelButton : MonoBehaviour {
     public GameObject mainPanel;
     public GameObject linkedPanel;
 
+    public GameObject dialoguePanel;
+    private DialogueManager manager;
+
 
     // Use this for initialization
     void Start ()
     {
         buttonRef = (MainPanelButton)thisButton.GetComponent<MainPanelButton>();
+        Text buttonText = thisButton.GetComponent<Text>();
+        //if (thisButton.CompareTag("Special")) buttonText.text = PlayerStatus.VisitingIsland.specialText;
 
         //Find all the private game object references so it doesn't have to be done in the editor
         interactionsText = GameObject.Find("InteractionsText").GetComponent<Text>();
@@ -38,9 +43,15 @@ public class MainPanelButton : MonoBehaviour {
 
         thisButton.onClick.AddListener(OnClick);
     }
+
+    public DialogueManager GetManager()
+    {
+        return manager;
+    }
 	
 	private void OnClick()
     {
+        Debug.Log("On click called");
         
 
         if(thisButton.CompareTag("Market")) //This calls another method so that, in the case of islands with special events, those methods can be written over
@@ -76,6 +87,11 @@ public class MainPanelButton : MonoBehaviour {
         if (thisButton.CompareTag("Wardsmith"))
         {
             PlayerStatus.VisitingIsland.WardsmithOnClick(buttonRef);
+        }
+
+        if(thisButton.CompareTag("Special"))
+        {
+            PlayerStatus.VisitingIsland.SpecialOnClick(buttonRef);
         }
 
         if (thisButton.CompareTag("SetSail"))

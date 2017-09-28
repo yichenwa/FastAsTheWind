@@ -16,31 +16,30 @@ public class TempSpecialButton : MonoBehaviour
     public GameObject mainPanel;
     public GameObject dialoguePanel;
 
-    public DialogueManager manager;
+    private DialogueManager manager;
 
     private int nextSet;
     private int indicatedAction;
-
-    private int killLoop;
+    
 
     // Use this for initialization
-    void Start()
-    {
-        dScriptPath = "Assets/DialogueTextFiles/" + dScriptName;
-        testButton.onClick.AddListener(OnClick);
-    }
-
-
-    private void OnClick()
-    {
-        mainPanel.gameObject.SetActive(false);
+    //void Start()
+    //{
         
-        manager.SetUpDialogue(dScriptPath);
+    //    testButton.onClick.AddListener(OnClick);
+    //}
 
-        DialoguePanelManager dpm = dialoguePanel.GetComponent<DialoguePanelManager>();
-        dpm.currentScript = DialogueManager.dScript;
 
-        dialoguePanel.SetActive(true);
-        dpm.Setup(0);
-    }
+    //private void OnClick()
+    //{
+    //    mainPanel.gameObject.SetActive(false);
+        
+    //    manager.SetUpDialogue(dScriptPath);
+
+    //    DialoguePanelManager dpm = dialoguePanel.GetComponent<DialoguePanelManager>();
+    //    dpm.currentScript = DialogueManager.dScript;
+
+    //    dialoguePanel.SetActive(true);
+    //    dpm.Setup(0);
+    //}
 }

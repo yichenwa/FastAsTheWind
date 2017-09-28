@@ -15,12 +15,25 @@ public class IslandAttributes : MonoBehaviour
     public bool hasWardsmith;
     public bool hasArchetier;
 
-    public bool hasSpecial;
-    public IslandSpecialAttributes specialAttributes; //If no special attributes, give the island the base class
+    public bool hasSpecial; //No need to set this to true, ever
+    public string specialText; //Not necessary if not an island with a special button
 
     private GameObject activePanel;
 
     private bool isDiscovered;
+
+
+    // Use this for initialization
+    public virtual void Start()
+    {
+        isDiscovered = false;
+        transform.position = IslandStats.IslandLocations[islandID];
+    }
+
+    public void Default()
+    {
+
+    }
 
     public void SetAttributes(string name, bool blackS, bool gunS, bool tav, bool wardS, bool arch, bool special)
     {
@@ -53,12 +66,6 @@ public class IslandAttributes : MonoBehaviour
         return activePanel;
     }
 
-    // Use this for initialization
-    void Start ()
-    {
-        isDiscovered = false;
-        transform.position = IslandStats.IslandLocations[islandID];
-    }
 
     public virtual void MarketOnClick(MainPanelButton caller)
     {
@@ -148,7 +155,7 @@ public class IslandAttributes : MonoBehaviour
 
     public virtual void SpecialOnClick(MainPanelButton caller) //Generic islands have no special button
     {
-        return;
+        Debug.Log("This shouldn't be here");
     }
 
     public virtual void SetSailOnClick(MainPanelButton caller)

@@ -319,7 +319,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1603736624845712, guid: dd26f61f348864745a440a595204b04d, type: 2}
       propertyPath: m_Name
-      value: Town 1
+      value: Valencia
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
@@ -356,15 +356,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128179e8242e1924da615c6384bc51f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  islandName: Quest Town 1
+  islandName: Valencia
   islandID: 0
-  hasBlacksmith: 1
+  hasBlacksmith: 0
   hasGunsmith: 1
   hasTavern: 1
-  hasWardsmith: 1
+  hasWardsmith: 0
   hasArchetier: 1
-  hasSpecial: 0
-  specialAttributes: {fileID: 0}
+  hasSpecial: 1
+  specialText: The "Blackwardsmith"
+  smithFirst: /DialogueTextFiles/ExampleQuest.txt
+  smithReturnUnknown: 
+  smithReturnKnown: 
+  smithReturnHated: 
+  smithReturnIncomplete: 
+  smithReturnComplete: 
 --- !u!1 &589394450
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMult: 15
   depletionRate: 10
-  encounterChance: 0.0001
+  encounterChance: 0
   islandID: {fileID: 1196948940}
   resourcesCount: {fileID: 323940803}
   goldCount: {fileID: 1757452256}

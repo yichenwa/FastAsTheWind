@@ -1,0 +1,47 @@
+A
+0: (The building where this "black wardsmith" supposedly lives sits at the corner of a thinly populated street, its shutters drawn shut. No one seems to be going in or out, and there's no smoke coming from the chimney)/2
+*KNOCK ON THE DOOR*/1/-1
+*LEAVE*/A/-1
+
+1: (There's a long period of silence. Then, there's the sound of someone walking towards the door, growing louder. A heavy latch is undone from the other side, and the door swings open.)/1
+*CONTINUE*/2/-1
+
+2: (Standing there with arms folded, his brow creased in irritation, is a man of middling age who looks like he hasn't shaved—or bathed—for days.)/1
+*CONTINUE*/3/-1
+
+3: Hmmph. What is it?/4
+Sorry, but are you Aldrenn Morr? The blackwardsmith?/4/-1
+I want some warded weapons, and you're going to make them for me./B/-1
+What's wrong with you?/C/-1
+Ah, um. . . nothing. Sorry to bother you, sir! *LEAVE*/A/0
+
+4: Yeah. That's me. What of it?/3
+I was just wondering if you could make me some warded weapons./5/-1
+Is something wrong?/C/-1
+No particular reason. Just curious, is all. Sorry to bother you. *LEAVE*/A/0
+
+5: Nope. Don't do that anymore. Goodbye.
+What? Why not?/6/-1
+I'm afraid you don't have a choice, bud. *THREATEN*/D/2
+Oh. Alright then. *LEAVE*/A/1
+
+6: (He frowns silently for a while, as though considering his response. Then he sighs, and his expression softens.)
+*CONTINUE*/7/-1
+
+7: Aah, fine, I might as well tell you. You may even be able to help. You see, last week my daughter ran off with this ragtag group of sailors, sailing on a vessel by the name "Relentless". Dockworkers told me they weren't flyin' no colors, so I'm afraid they were pirates.
+If I brought her back to you, would you make warded weapons for me?/8/-1
+
+8: You would do that for me? I mean, yes, of course I'd make you weapons, if you did something like that. Why, if you bring her back safely, I'll make you some weapons for free!
+It's a deal then. I bring you your daughter, you make warded weapons for me./9/3
+
+9:
+
+10:
+
+11:
+
+12:
+
+13:
+
+14:

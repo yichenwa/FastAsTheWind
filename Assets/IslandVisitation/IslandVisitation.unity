@@ -678,8 +678,9 @@ MonoBehaviour:
   interactionsText: {fileID: 0}
   relevantStatText: {fileID: 0}
   goldCountText: {fileID: 0}
-  mainPanel: {fileID: 0}
+  mainPanel: {fileID: 1499880883}
   linkedPanel: {fileID: 0}
+  dialoguePanel: {fileID: 929484703}
 --- !u!1 &305345918
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,6 +2436,7 @@ MonoBehaviour:
   goldCountText: {fileID: 0}
   mainPanel: {fileID: 1499880883}
   linkedPanel: {fileID: 1177029347}
+  dialoguePanel: {fileID: 0}
 --- !u!1 &1062188195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3057,6 +3059,7 @@ MonoBehaviour:
   goldCountText: {fileID: 2130573041}
   mainPanel: {fileID: 1499880883}
   linkedPanel: {fileID: 329759224}
+  dialoguePanel: {fileID: 0}
 --- !u!1 &1382996852
 GameObject:
   m_ObjectHideFlags: 0
@@ -3186,6 +3189,7 @@ MonoBehaviour:
   goldCountText: {fileID: 0}
   mainPanel: {fileID: 1499880883}
   linkedPanel: {fileID: 855265238}
+  dialoguePanel: {fileID: 0}
 --- !u!1 &1395180927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3576,6 +3580,7 @@ MonoBehaviour:
   goldCountText: {fileID: 0}
   mainPanel: {fileID: 1499880883}
   linkedPanel: {fileID: 305345918}
+  dialoguePanel: {fileID: 0}
 --- !u!1 &1526374531
 GameObject:
   m_ObjectHideFlags: 0
@@ -3705,6 +3710,7 @@ MonoBehaviour:
   goldCountText: {fileID: 0}
   mainPanel: {fileID: 1499880883}
   linkedPanel: {fileID: 2139135325}
+  dialoguePanel: {fileID: 0}
 --- !u!1 &1528774357
 GameObject:
   m_ObjectHideFlags: 0
@@ -4045,6 +4051,7 @@ MonoBehaviour:
   goldCountText: {fileID: 0}
   mainPanel: {fileID: 0}
   linkedPanel: {fileID: 0}
+  dialoguePanel: {fileID: 0}
 --- !u!1 &1608506565
 GameObject:
   m_ObjectHideFlags: 0
@@ -4938,6 +4945,7 @@ MonoBehaviour:
   goldCountText: {fileID: 0}
   mainPanel: {fileID: 1499880883}
   linkedPanel: {fileID: 1104856478}
+  dialoguePanel: {fileID: 0}
 --- !u!1 &1776870259
 GameObject:
   m_ObjectHideFlags: 0
@@ -5220,6 +5228,7 @@ MonoBehaviour:
   goldCountText: {fileID: 0}
   mainPanel: {fileID: 1499880883}
   linkedPanel: {fileID: 587030192}
+  dialoguePanel: {fileID: 0}
 --- !u!1 &1897451543
 GameObject:
   m_ObjectHideFlags: 0
