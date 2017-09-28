@@ -13,6 +13,7 @@ public class DialoguePanelManager : MonoBehaviour
     public DialogueScript currentScript;
 
     private int currentSet;
+    private bool[] actions;
 
     //void Start()
     //{
@@ -30,6 +31,11 @@ public class DialoguePanelManager : MonoBehaviour
 
     public void Setup(int setNum)
     {
+        if(setNum == 0)
+        {
+            actions = new bool[PlayerStatus.VisitingIsland.actions];
+        }
+
         if (currentScript == null) currentScript = DialogueManager.dScript;
 
         foreach (Transform child in dialoguePanel.transform) //Reset the panel
@@ -40,6 +46,8 @@ public class DialoguePanelManager : MonoBehaviour
         
         if ((setNum == currentScript.dialogueSets.Length)) //If the conclude-dialogue button is pressed, will close the dialogue panel and return to menu
         {
+            PlayerStatus.VisitingIsland.TriggerDialogueConsequences(actions);
+
             gameObject.SetActive(false);
             PlayerStatus.VisitingIsland.GetActivePanel().SetActive(true);
 
@@ -59,5 +67,10 @@ public class DialoguePanelManager : MonoBehaviour
             DialogueButtons dialogueButton = button.GetComponent<DialogueButtons>(); //Get a reference to its script
             dialogueButton.SetVars(currentScript.GetDialogue(setNum, i), currentScript.GetNextSet(setNum, i), currentScript.GetAction(setNum, i)); //Set the button's variables
         }
+    }
+
+    public void SetActions(int actionNum)
+    {
+        actions[actionNum] = true;
     }
 }

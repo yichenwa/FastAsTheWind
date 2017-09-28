@@ -365,7 +365,7 @@ MonoBehaviour:
   hasArchetier: 1
   hasSpecial: 1
   specialText: The "Blackwardsmith"
-  smithFirst: /DialogueTextFiles/ExampleQuest.txt
+  smithFirst: ExampleQuest.txt
   smithReturnUnknown: 
   smithReturnKnown: 
   smithReturnHated: 

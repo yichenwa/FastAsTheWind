@@ -17,6 +17,8 @@ public class IslandSpecialAttributes : IslandAttributes
     {
         hasSpecial = true;
 
+        actions = 5;
+
         base.Start();
     }
 
@@ -24,10 +26,9 @@ public class IslandSpecialAttributes : IslandAttributes
     {
         if (QuestsStatus.testQuestStatus == 0)
         {
-            Debug.Log("Special clicked");
             caller.mainPanel.gameObject.SetActive(false);
 
-            DialogueManager.SetUpDialogue(smithFirst);
+            DialogueManager.SetUpDialogue("Assets/DialogueTextFiles/" + smithFirst);
 
             DialoguePanelManager dpm = caller.dialoguePanel.GetComponent<DialoguePanelManager>();
             //dpm.currentScript = DialogueManager.dScript;
@@ -36,4 +37,88 @@ public class IslandSpecialAttributes : IslandAttributes
             dpm.Setup(0);
         }
     }
+
+    public override void TriggerDialogueConsequences(bool[] actions)
+    {
+        if (actions[0] == true)
+        {
+            ActionZero();
+        }
+
+        if (actions[1] == true)
+        {
+            ActionOne();
+        }
+
+        if (actions[2] == true)
+        {
+            ActionTwo();
+        }
+
+        if (actions[3] == true)
+        {
+            ActionThree();
+        }
+
+        if (actions[4] == true)
+        {
+            ActionFour();
+        }
+
+        //if (actions[5] == true)
+        //{
+        //    ActionFive();
+        //}
+
+        //if (actions[6] == true)
+        //{
+        //    ActionSix();
+        //}
+
+        //if (actions[7] == true)
+        //{
+        //    ActionSeven();
+        //}
+    }
+
+    private void ActionZero()
+    {
+        QuestsStatus.testQuestStatus = 10;
+    }
+
+    private void ActionOne()
+    {
+        QuestsStatus.testQuestStatus = 20;
+    }
+
+    private void ActionTwo()
+    {
+        QuestsStatus.testQuestStatus = -10;
+    }
+
+    private void ActionThree()
+    {
+        QuestsStatus.testQuestStatus = 30;
+    }
+
+    private void ActionFour()
+    {
+        QuestsStatus.testQuestStatus = 40;
+        QuestsStatus.testQuestActive = true;
+    }
+
+    //private void ActionFive()
+    //{
+
+    //}
+
+    //private void ActionSix()
+    //{
+
+    //}
+
+    //private void ActionSeven()
+    //{
+
+    //}
 }

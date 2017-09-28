@@ -17,6 +17,7 @@ public class IslandAttributes : MonoBehaviour
 
     public bool hasSpecial; //No need to set this to true, ever
     public string specialText; //Not necessary if not an island with a special button
+    public int actions;
 
     private GameObject activePanel;
 
@@ -66,7 +67,7 @@ public class IslandAttributes : MonoBehaviour
         return activePanel;
     }
 
-
+    //What the buttons in the visitation scene do, which can be overwritten by a subclass of IslandAttributes
     public virtual void MarketOnClick(MainPanelButton caller)
     {
         caller.mainPanel.SetActive(false);
@@ -162,6 +163,91 @@ public class IslandAttributes : MonoBehaviour
     {
         SceneManager.LoadScene(SceneIndexes.WorldMap());
     }
+
+
+    //Potential actions that can result from dialogue in the visitation sequences
+    public virtual void TriggerDialogueConsequences(bool[] actions)
+    {
+        //if(actions[0] == true)
+        //{
+        //    ActionZero();
+        //}
+
+        //if (actions[1] == true)
+        //{
+        //    ActionOne();
+        //}
+
+        //if (actions[2] == true)
+        //{
+        //    ActionTwo();
+        //}
+
+        //if (actions[3] == true)
+        //{
+        //    ActionThree();
+        //}
+
+        //if (actions[4] == true)
+        //{
+        //    ActionFour();
+        //}
+
+        //if (actions[5] == true)
+        //{
+        //    ActionFive();
+        //}
+
+        //if (actions[6] == true)
+        //{
+        //    ActionSix();
+        //}
+
+        //if (actions[7] == true)
+        //{
+        //    ActionSeven();
+        //}
+    }
+
+    //public void ActionZero()
+    //{
+
+    //}
+
+    //public void ActionOne()
+    //{
+
+    //}
+
+    //public void ActionTwo()
+    //{
+
+    //}
+
+    //public void ActionThree()
+    //{
+
+    //}
+
+    //public void ActionFour()
+    //{
+
+    //}
+
+    //public void ActionFive()
+    //{
+
+    //}
+
+    //public void ActionSix()
+    //{
+
+    //}
+
+    //public void ActionSeven()
+    //{
+
+    //}
 
 }
 
