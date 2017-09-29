@@ -17,17 +17,23 @@ public class IslandAttributes : MonoBehaviour
 
     public bool hasSpecial; //No need to set this to true, ever
     public string specialText; //Not necessary if not an island with a special button
+    public string specInfo;
+    public string specInfoResponse;
     public int actions;
 
     private GameObject activePanel;
 
+    public bool specialVisible;
     private bool isDiscovered;
 
 
     // Use this for initialization
     public virtual void Start()
     {
+        specialVisible = false;
+        actions = 0;
         isDiscovered = false;
+        specialVisible = false;
         transform.position = IslandStats.IslandLocations[islandID];
     }
 
@@ -65,6 +71,29 @@ public class IslandAttributes : MonoBehaviour
     public GameObject GetActivePanel()
     {
         return activePanel;
+    }
+
+    //Below are all the virtual classes
+
+
+    public virtual bool CheckSpecial() //Here, in subclass, have this return true if the requirements have been met for seeing the special button
+    {
+        return false;
+    }
+
+    public virtual string GetSpecInfoButtonText()
+    {
+        return "NONE";
+    }
+
+    public virtual string GetSpecInfoResponse()
+    {
+        return "";
+    }
+
+    public virtual string GetRumors() //In subclass, return a rumor string of your choice, as well as initiate any changes caused by that/those rumor/s
+    {
+        return null;
     }
 
     //What the buttons in the visitation scene do, which can be overwritten by a subclass of IslandAttributes

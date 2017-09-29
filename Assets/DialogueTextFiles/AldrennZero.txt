@@ -1,5 +1,5 @@
 ﻿11
- (The building where this "black wardsmith" supposedly lives sits at the corner of a thinly populated street, its shutters drawn shut. No one seems to be going in or out, and there's no smoke coming from the chimney)/2
+ (The building where this "blackwardsmith" supposedly lives sits at the corner of a thinly populated street, its shutters drawn shut. No one seems to be going in or out, and there's no smoke coming from the chimney)/2
 *KNOCK ON THE DOOR*/1/-1
 *LEAVE*/11/-1
  (There's a long period of silence. Then, there's the sound of someone walking towards the door, growing louder. A heavy latch is undone from the other side, and the door swings open.)/1
@@ -8,7 +8,7 @@
 *CONTINUE*/3/-1
  Hmmph. What is it?/4
 Sorry, but are you Aldrenn Morr? The blackwardsmith?/4/-1
-I want some warded weapons, and you're going to make them for me. *THREATEN*/11/2
+I want some warded weapons, and you're going to make them for me. *THREATEN*/10/2
 What's wrong with you?/6/-1
 Ah, um. . . nothing. Sorry to bother you, sir! *LEAVE*/11/0
  Yeah. That's me. What of it?/3
@@ -17,7 +17,7 @@ Is something wrong?/6/-1
 No particular reason. Just curious, is all. Sorry to bother you. *LEAVE*/11/0
  Nope. Don't do that anymore. Goodbye./3
 What? Why not?/6/-1
-I'm afraid you don't have a choice, bud. *THREATEN*/11/2
+I'm afraid you don't have a choice, bud. *THREATEN*/10/2
 Oh. Alright then. *LEAVE*/11/1
  (He frowns silently for a while, as though considering his response. Then he sighs, and his expression softens.)/1
 *CONTINUE*/7/-1

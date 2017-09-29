@@ -123,7 +123,7 @@ public class DialogueManager : MonoBehaviour
 
             nextChar = (char)reader.Read();
         }
-        Debug.Log("Element: " + element);
+        //Debug.Log("Element: " + element);
         return element;
     }
 }

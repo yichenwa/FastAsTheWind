@@ -15,7 +15,7 @@ public class TempStartGame : MonoBehaviour {
         PlayerStatus.ShipHealthCurrent = 100;
         PlayerStatus.AmmoCount = 20;
 
-        QuestsStatus.testQuestStatus = 0;
+        QuestsStatus.testQuestStatus = -1;
 
         IslandStats.IslandLocations = GetComponent<IslandGeneration>().generateIslands();
 

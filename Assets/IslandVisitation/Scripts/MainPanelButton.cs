@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 
-public class MainPanelButton : MonoBehaviour {
+public class MainPanelButton : MonoBehaviour
+{
 
     public Button thisButton;
+    public Text buttonText;
     private MainPanelButton buttonRef;
 
     public Text interactionsText;
@@ -24,8 +26,7 @@ public class MainPanelButton : MonoBehaviour {
     void Start ()
     {
         buttonRef = (MainPanelButton)thisButton.GetComponent<MainPanelButton>();
-        Text buttonText = thisButton.GetComponent<Text>();
-        //if (thisButton.CompareTag("Special")) buttonText.text = PlayerStatus.VisitingIsland.specialText;
+        if (thisButton.CompareTag("Special")) buttonText.text = PlayerStatus.VisitingIsland.specialText;
 
         //Find all the private game object references so it doesn't have to be done in the editor
         interactionsText = GameObject.Find("InteractionsText").GetComponent<Text>();
@@ -44,6 +45,7 @@ public class MainPanelButton : MonoBehaviour {
         thisButton.onClick.AddListener(OnClick);
     }
 
+
     public DialogueManager GetManager()
     {
         return manager;
@@ -51,9 +53,6 @@ public class MainPanelButton : MonoBehaviour {
 	
 	private void OnClick()
     {
-        Debug.Log("On click called");
-        
-
         if(thisButton.CompareTag("Market")) //This calls another method so that, in the case of islands with special events, those methods can be written over
         {
             PlayerStatus.VisitingIsland.MarketOnClick(buttonRef);

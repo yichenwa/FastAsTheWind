@@ -365,12 +365,19 @@ MonoBehaviour:
   hasArchetier: 1
   hasSpecial: 1
   specialText: The "Blackwardsmith"
-  smithFirst: ExampleQuest.txt
-  smithReturnUnknown: 
-  smithReturnKnown: 
-  smithReturnHated: 
-  smithReturnIncomplete: 
-  smithReturnComplete: 
+  specInfo: 
+  specInfoResponse: 
+  actions: 0
+  specialVisible: 0
+  tavernRumor: There's a man in this town who I hear can smith weapons and infuse
+    wards. I'd check him out myself, if I had enough money.
+  aldrennZero: AldrennZero.txt
+  aldrennTen: AldrennTen.txt
+  aldrennTwenty: AldrennTwenty.txt
+  aldrennThirty: AldrennThirty.txt
+  aldrennFortyPlus: AldrennFortyPlus.txt
+  aldrennHundred: AldrennHundred.txt
+  aldrennNegTen: AldrennNegTen.txt
 --- !u!1 &589394450
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,7 +582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMult: 15
   depletionRate: 10
-  encounterChance: 0
+  encounterChance: 0.0001
   islandID: {fileID: 1196948940}
   resourcesCount: {fileID: 323940803}
   goldCount: {fileID: 1757452256}
@@ -1045,7 +1052,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1603736624845712, guid: dd26f61f348864745a440a595204b04d, type: 2}
       propertyPath: m_Name
-      value: Town 2
+      value: Palmaar
       objectReference: {fileID: 0}
     - target: {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d,
         type: 2}
@@ -1087,7 +1094,8 @@ Prefab:
       propertyPath: hasArchetier
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114004612843852516, guid: dd26f61f348864745a440a595204b04d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: dd26f61f348864745a440a595204b04d, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1401694741 stripped
@@ -1095,6 +1103,40 @@ Transform:
   m_PrefabParentObject: {fileID: 4068861585536764, guid: dd26f61f348864745a440a595204b04d,
     type: 2}
   m_PrefabInternal: {fileID: 1401694740}
+--- !u!1 &1401694742 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1603736624845712, guid: dd26f61f348864745a440a595204b04d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1401694740}
+--- !u!114 &1401694743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1401694742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80337d706cd76d4497018c54e6ebacf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  islandName: Palmaar
+  islandID: 1
+  hasBlacksmith: 1
+  hasGunsmith: 1
+  hasTavern: 1
+  hasWardsmith: 0
+  hasArchetier: 0
+  hasSpecial: 1
+  specialText: Aunt Melna's
+  specInfo: Ask about "Relentless"
+  specInfoResponse: Believe it or not, I think I know exactly what you're talkin'
+    about. Small girl, long brown hair? You'll find her over at Aunt Melna's, just
+    down the street.
+  actions: 1
+  specialVisible: 0
+  tavernRumor: Ain't much happenin' 'round here. We're pretty out-of-the-way of all
+    them goings-on, you see.
+  elliaFifty: ElliaFifty.txt
 --- !u!1 &1757452254
 GameObject:
   m_ObjectHideFlags: 0
