@@ -13,23 +13,30 @@ public class DialoguePanelManager : MonoBehaviour
     public DialogueScript currentScript;
 
     private int currentSet;
+    private bool[] actions;
 
-    void Start()
-    {
-        //currentScript = DialogueManager.dScript;
+    //void Start()
+    //{
+    //    currentScript = DialogueManager.dScript;
 
-        //Setup(0);
-    }
+    //    Setup(0);
+    //}
 
-    void OnEnable()
-    {
-        //currentScript = DialogueManager.dScript;
+    //void OnEnable()
+    //{
+    //    currentScript = DialogueManager.dScript;
 
-        //Setup(0);
-    }
+    //    Setup(0);
+    //}
 
     public void Setup(int setNum)
     {
+        if(setNum == 0)
+        {
+            actions = new bool[PlayerStatus.VisitingIsland.actions];
+        }
+
+        if (currentScript == null) currentScript = DialogueManager.dScript;
 
         foreach (Transform child in dialoguePanel.transform) //Reset the panel
         {
@@ -39,10 +46,12 @@ public class DialoguePanelManager : MonoBehaviour
         
         if ((setNum == currentScript.dialogueSets.Length)) //If the conclude-dialogue button is pressed, will close the dialogue panel and return to menu
         {
-            gameObject.SetActive(false);
-            mainPanel.SetActive(true);
+            PlayerStatus.VisitingIsland.TriggerDialogueConsequences(actions);
 
-            interactionsText.text = "Where to next, captain?";
+            gameObject.SetActive(false);
+            PlayerStatus.VisitingIsland.GetActivePanel().SetActive(true);
+
+            interactionsText.text = "";
 
             return;
         }
@@ -58,5 +67,10 @@ public class DialoguePanelManager : MonoBehaviour
             DialogueButtons dialogueButton = button.GetComponent<DialogueButtons>(); //Get a reference to its script
             dialogueButton.SetVars(currentScript.GetDialogue(setNum, i), currentScript.GetNextSet(setNum, i), currentScript.GetAction(setNum, i)); //Set the button's variables
         }
+    }
+
+    public void SetActions(int actionNum)
+    {
+        actions[actionNum] = true;
     }
 }

@@ -9,9 +9,9 @@ public class ChangeIntTextEnter : MonoBehaviour {
 
     public string displayedStat; //use "Resources", "Cannonballs", or "Health"
 
-    public Text interactionsText;
-    public Text relevantStatText;
-    public Text goldCountText;
+    private Text interactionsText;
+    private Text relevantStatText;
+    private Text goldCountText;
 
     private void Start()
     {

@@ -8,6 +8,15 @@ TagManager:
   - Enemy
   - DialogueButton
   - ToDestroy
+  - Market
+  - Shipswright
+  - Tavern
+  - Blacksmith
+  - Gunsmith
+  - Archetier
+  - Wardsmith
+  - Special
+  - SetSail
   layers:
   - Default
   - TransparentFX

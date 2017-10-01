@@ -26,7 +26,11 @@ public class VisitationManager : MonoBehaviour {
         if (!PlayerStatus.VisitingIsland.hasTavern) tavern.gameObject.SetActive(false);
         if (!PlayerStatus.VisitingIsland.hasWardsmith) wSmith.gameObject.SetActive(false);
         if (!PlayerStatus.VisitingIsland.hasArchetier) archetier.gameObject.SetActive(false);
-        if (!PlayerStatus.VisitingIsland.hasSpecial) spec.gameObject.SetActive(false);
+        if (!PlayerStatus.VisitingIsland.specialVisible) spec.gameObject.SetActive(false);
+    }
 
+    private void Update()
+    {
+        if (PlayerStatus.VisitingIsland.CheckSpecial()) spec.gameObject.SetActive(true);
     }
 }
