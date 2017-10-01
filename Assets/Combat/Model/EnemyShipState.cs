@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShipState : MonoBehaviour
-{
-    //Gets the ship stats.
-    public BasicShip player;
+public class EnemyShipState : MonoBehaviour {
 
-    //Gets the weapon stats.
-    public BaseWeapon cannon;
+    //The same as Player Ship State, just for the enemy ship.
 
-    //Gets a crew member.
+    public BasicShip enemy;
+
+    public BaseWeapon cannon = new BaseWeapon();
+
     public BaseCrew captain;
 
-    //For list of player ships and enemy ships and action queue.
     private CombatState CSM;
 
-    //States that the weapon could be in. Should be part of BaseWeapon.
     public enum States
     {
         PROCESSING,
@@ -27,25 +24,22 @@ public class PlayerShipState : MonoBehaviour
         DEAD
     }
 
-    //The current state the weapon is in.
     public States currentState;
 
     void Start()
     {
-        // First state where the weapon will count up until it can be used. Subject to change of course.
+        // determine enemy ship health from world map
+        enemy.shipHealth = EnemyStatus.ShipHealthCurrent;
         currentState = States.PROCESSING;
-
         CSM = GameObject.Find("Combat Manager").GetComponent<CombatState>();
+
     }
 
     void Update()
     {
+        EnemyStatus.ShipHealthCurrent = (int)enemy.shipHealth;
 
         //Debug.Log(currentState);
-
-        //Switch case for the weapon states.
-        //As long as the weapon is in processing, the current cooldown will count up.
-        //When it reaches the queue state, it will create a action or turn and add it to the queue.
 
         switch (currentState)
         {
@@ -53,10 +47,9 @@ public class PlayerShipState : MonoBehaviour
                 advanceCooldown();
                 break;
             case States.QUEUE:
-                if(CSM.enemy.Count > 0)
+                if (CSM.player.Count > 0)
                     attackTarget();
-                else
-                {
+                else {
                     currentState = States.DEAD;
                 }
                 break;
@@ -69,10 +62,8 @@ public class PlayerShipState : MonoBehaviour
             case States.DEAD:
                 break;
         }
-
     }
 
-    //Will count up untill it reaches the weapon cooldown time. When it reaches the cooldown time it will change states.
     void advanceCooldown()
     {
         cannon.currentCooldown = cannon.currentCooldown + Time.deltaTime;
@@ -82,20 +73,15 @@ public class PlayerShipState : MonoBehaviour
         }
     }
 
-    //When the weapon is in queue state, it will run attackTarget. 
-
-    void attackTarget() {
-        //Create a new "Turn"
-        //Gets attacker Objets and target Objects from Combat State CSM. 
+    void attackTarget()
+    {
         Turns basicAttack = new Turns();
-        basicAttack.attackerName = player.shipName;
-        basicAttack.attackerObject = CSM.player[0];
-        basicAttack.targetObject = CSM.enemy[0];
-        //Add to the attack queue.
+        basicAttack.attackerName = enemy.shipName;
+        basicAttack.attackerObject = CSM.enemy[0];
+        basicAttack.targetObject = CSM.player[0];
         CSM.Add(basicAttack);
-        //Reset cooldown and state/
         cannon.currentCooldown = 0f;
         currentState = States.PROCESSING;
-        
+
     }
 }
