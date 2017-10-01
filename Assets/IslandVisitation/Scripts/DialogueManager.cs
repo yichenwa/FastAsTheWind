@@ -54,14 +54,8 @@ public class DialogueManager : MonoBehaviour
     public static DialogueScript dScript = new DialogueScript();
     public static int[] dActions = new int[1]; //Unless I find a better way to do this, this number will have to be changed whenever there a new dialogue-resultant method is made
 
-	// Use this for initialization
-	void Start ()
-    {
 
-    }
-
-    
-    public void SetUpDialogue(string filePath)
+    public static void SetUpDialogue(string filePath)
     {
         string path = filePath;
         StreamReader dialogueReader = new StreamReader(path);
@@ -111,7 +105,7 @@ public class DialogueManager : MonoBehaviour
         dScript.dialogueSets = dSetArray; //Done making all sets, so dScript's dialogueSets can be set to dSetArray
     }
 
-    public string GetElement(StreamReader reader)
+    private static string GetElement(StreamReader reader)
     {
         string element = "";
         char nextChar = (char)reader.Read();
@@ -129,11 +123,7 @@ public class DialogueManager : MonoBehaviour
 
             nextChar = (char)reader.Read();
         }
+        //Debug.Log("Element: " + element);
         return element;
-    }
-	
-	public void ClearScript()
-    {
-        dScript = null;
     }
 }
