@@ -25,6 +25,11 @@ public class ControlScript : MonoBehaviour {
 	void Update () {
         // TODO: update valid controls (i.e. if out of ammo or on cooldown, disable fire button)
         ButtonFire.interactable = playerShipState.canFire();
+		if (Input.GetKeyDown("j"))
+		{
+			GameObject itemused = ((PlayerInventory)gameObject.GetComponent("playerInventory")).inventoryItems[0].item;
+			((ItemBase)itemused.GetComponent("ItemBase")).useItem();
+		}
         if (combatState.combatOver)
             ButtonEndText.text = "Return to World Map";
     }
