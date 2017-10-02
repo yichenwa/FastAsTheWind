@@ -5,26 +5,26 @@ using UnityEngine;
 public class FirstCannon : MonoBehaviour
 {
 
-        public string weaponName = "Test";
-        public float weaponCost;
-        public float weaponCooldown = 5f;
-        public float currentCooldown = 0f;
-        public float weaponAttack = 50f;
+     public string weaponName = "Test";
+     public float weaponCost;
+     public float weaponCooldown = 5f;
+     public float currentCooldown = 0f;
+     public float weaponAttack = 50f;
 
-        //States that the weapon could be in.
-        public enum States
-        {
-          PROCESSING,
-          WAITING,
-          SELECTING,
-          QUEUE,
-          ACTION,
-          DEAD
-        }
+     //States that the weapon could be in.
+     public enum States
+     {
+       PROCESSING,
+       WAITING,
+       SELECTING,
+       QUEUE,
+       ACTION,
+       DEAD
+     }
 
-        //The current state the weapon is in.
-        public States currentState;
-        private CombatState CSM;
+     //The current state the weapon is in.
+     public States currentState;
+     private CombatState CSM;
 
 
     void Start () {
@@ -49,11 +49,8 @@ public class FirstCannon : MonoBehaviour
                // fire();
                 break;
             case States.SELECTING:
-                if (CSM.enemy.Count > 0)
+                if (CSM.enemy.Count < 0)
                 {
-                    target(CSM.enemy[0]);
-                }
-                else {
                     currentState = States.DEAD;
                 }
                 break;
@@ -115,5 +112,10 @@ public class FirstCannon : MonoBehaviour
     public bool canFire() // returns true if allowed to attack
     {
         return (currentState == States.WAITING && PlayerStatus.AmmoCount > 0);
+    }
+
+    public bool canTarget() // returns true if allowed to attack
+    {
+        return (currentState == States.SELECTING && PlayerStatus.AmmoCount > 0);
     }
 }

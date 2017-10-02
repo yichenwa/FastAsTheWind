@@ -9,11 +9,14 @@ public class ControlScript : MonoBehaviour {
     public Button ButtonEnd; // points to Combat/Canvas/ButtonEnd
     public Text ButtonEndText; // points to Combat/Canvas/ButtonEnd/Text
     public Button ButtonFire; // points to Combat/Canvas/ButtonFire
+    public Button ButtonEnemy;
     public GameObject combatManager; // points to Combat/Combat Manager
     private CombatState combatState;
     private PlayerShipState playerShipState;
     private EnemyShipState enemyShipState;
     private FirstCannon test;
+
+    private GameObject target;
 
     // Use this for initialization
     void Start () {
@@ -28,12 +31,20 @@ public class ControlScript : MonoBehaviour {
 	void Update () {
         // TODO: update valid controls (i.e. if out of ammo or on cooldown, disable fire button)
         ButtonFire.interactable = test.canFire();
+        
+
         if (combatState.combatOver)
             ButtonEndText.text = "Return to World Map";
     }
 
     public void buttonFirePressed () { // called when the ButtonFire is pressed in the UI
         test.fire();
+    }
+
+    public void buttonEnemyPressed()
+    { // called when the ButtonFire is pressed in the UI
+        target = combatState.enemy[0];
+        test.target(target);
     }
 
     public void buttonEndPressed()
