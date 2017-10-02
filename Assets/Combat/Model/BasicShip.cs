@@ -8,4 +8,5 @@ public class BasicShip{
     public string shipName;
     public float shipHealth;
 
+
 }

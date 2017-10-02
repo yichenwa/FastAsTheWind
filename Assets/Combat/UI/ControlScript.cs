@@ -13,24 +13,27 @@ public class ControlScript : MonoBehaviour {
     private CombatState combatState;
     private PlayerShipState playerShipState;
     private EnemyShipState enemyShipState;
+    private FirstCannon test;
 
     // Use this for initialization
     void Start () {
         combatState = (CombatState)combatManager.GetComponent("CombatState"); // to get a non-static reference to the ViewScript Object
         playerShipState = (PlayerShipState)combatState.player[0].GetComponent("PlayerShipState");
         enemyShipState = (EnemyShipState)combatState.player[0].GetComponent("EnemyShipState");
+        test = (FirstCannon)combatState.player[0].GetComponent("FirstCannon");
+        
     }
 
     // Update is called once per frame
 	void Update () {
         // TODO: update valid controls (i.e. if out of ammo or on cooldown, disable fire button)
-        ButtonFire.interactable = playerShipState.canFire();
+        ButtonFire.interactable = test.canFire();
         if (combatState.combatOver)
             ButtonEndText.text = "Return to World Map";
     }
 
     public void buttonFirePressed () { // called when the ButtonFire is pressed in the UI
-        playerShipState.attackTarget();
+        test.fire();
     }
 
     public void buttonEndPressed()

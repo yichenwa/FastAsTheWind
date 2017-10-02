@@ -10,8 +10,6 @@ public class EnemyShipState : MonoBehaviour {
 
     public BaseWeapon cannon = new BaseWeapon();
 
-    public BaseCrew captain;
-
     private CombatState CSM;
 
     public enum States

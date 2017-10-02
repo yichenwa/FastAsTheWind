@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerStatus
 {
 
+    public static string shipName { get; set; }
+
     public static int GoldCount { get; set; }
 
     public static int ResourcesCount { get; set; }

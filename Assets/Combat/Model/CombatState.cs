@@ -34,6 +34,8 @@ public class CombatState : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+      //  Debug.Log(actions.Count);
+
         //Judge if the next attack is from the enemy or player. Kind of bad. Should change. 
         if (actions.Count > 0) {
             if (actions.Peek().attackerName == "FTL")
@@ -56,9 +58,11 @@ public class CombatState : MonoBehaviour {
     {
         PlayerShipState test = input.attackerObject.GetComponent<PlayerShipState>();
         EnemyShipState test2 = input.targetObject.GetComponent<EnemyShipState>();
-        test2.enemy.shipHealth = test2.enemy.shipHealth - test.cannon.weaponAttack;
-        UI.printToCombatLog("The " + test.player.shipName + " dealt " + test.cannon.weaponAttack.ToString() + " damage to the " + test2.enemy.shipName + "!");
-        if (test2.enemy.shipHealth <= 0) {
+        test2.enemy.shipHealth = test2.enemy.shipHealth - input.test.weaponAttack;
+        input.test.reset();
+        UI.printToCombatLog("The " + test.player.shipName + " dealt " + input.test.weaponAttack.ToString() + " damage to the " + test2.enemy.shipName + "!");
+        if (test2.enemy.shipHealth <= 0)
+        {
             Destroy(input.targetObject);
             enemy.Remove(input.targetObject);
             EnemyStatus.ShipHealthCurrent = 0;
@@ -66,6 +70,7 @@ public class CombatState : MonoBehaviour {
             playerWon = true;
             combatOver = true;
         }
+        
     }
 
     void EnemyDoDamage(Turns input)

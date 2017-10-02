@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 182391796}
   - component: {fileID: 182391795}
   - component: {fileID: 182391794}
+  - component: {fileID: 182391798}
   - component: {fileID: 182391793}
   m_Layer: 0
   m_Name: Player
@@ -135,21 +136,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 182391792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebf00e637f510c54cb0a48000a256dbf, type: 3}
+  m_Script: {fileID: 11500000, guid: d3aed8fcbe4b5ff40ab4d7af4195c5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-    shipName: FTL
-    shipHealth: 100
-  cannon:
-    weaponName: Cannon
-    weaponCost: 50
-    weaponCooldown: 2
-    currentCooldown: 0
-    weaponAttack: 59
-  captain:
-    name: Bob
-    health: 40
+  weaponName: Test
+  weaponCost: 0
+  weaponCooldown: 5
+  currentCooldown: 0
+  weaponAttack: 50
   currentState: 0
 --- !u!23 &182391794
 MeshRenderer:
@@ -215,6 +209,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &182391798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 182391792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf00e637f510c54cb0a48000a256dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player:
+    shipName: 
+    shipHealth: 0
+  cannon: {fileID: 0}
 --- !u!1 &211961432
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +253,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: []
   enemy: []
+  UIScripts: {fileID: 0}
+  combatOver: 0
+  playerWon: 0
 --- !u!4 &211961434
 Transform:
   m_ObjectHideFlags: 0
@@ -354,16 +366,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy:
     shipName: Boat
-    shipHealth: 50
+    shipHealth: 110
   cannon:
     weaponName: Cannon
     weaponCost: 5
     weaponCooldown: 3
     currentCooldown: 0
     weaponAttack: 10
-  captain:
-    name: John
-    health: 20
+    currentState: 0
   currentState: 0
 --- !u!1 &1431649733
 GameObject:

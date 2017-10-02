@@ -10,6 +10,7 @@ public class Turns{
     public string attackerName;
     public GameObject attackerObject;
     public GameObject targetObject;
+    public FirstCannon test;
    
 
 }
