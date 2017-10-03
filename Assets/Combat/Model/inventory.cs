@@ -17,7 +17,7 @@ public class inventory : MonoBehaviour
 	void Start()
 	{
         database = GetComponent<Baseitem>();
-		slotAmount = 1;
+		slotAmount = 0;
 		inventoryPanel = GameObject.Find("Inventory Panel");
         slotPanel = inventoryPanel.transform.Find("SlotPanel").gameObject;
 		for (int i = 0; i < slotAmount; i++)
@@ -25,7 +25,8 @@ public class inventory : MonoBehaviour
             items.Add(new Item());
 			slots.Add(Instantiate(inventorySlot)); //add iventory slot
 			slots[i].transform.SetParent(slotPanel.transform);
-		}
+
+        }
         // AddItem(0);
 	}
 
