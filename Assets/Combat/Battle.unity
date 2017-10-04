@@ -120,7 +120,6 @@ GameObject:
   - component: {fileID: 182391795}
   - component: {fileID: 182391794}
   - component: {fileID: 182391793}
-  - component: {fileID: 182391798}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -207,23 +206,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &182391798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 182391792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3aed8fcbe4b5ff40ab4d7af4195c5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: Test
-  weaponCost: 0
-  weaponCooldown: 5
-  currentCooldown: 0
-  weaponAttack: 50
-  currentState: 0
 --- !u!1 &211961432
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +640,6 @@ MonoBehaviour:
     weaponCooldown: 3
     currentCooldown: 0
     weaponAttack: 10
-    currentState: 0
   currentState: 0
 --- !u!1 &590617198
 GameObject:

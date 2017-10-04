@@ -5,7 +5,7 @@ using UnityEngine;
 public class FirstCannon : MonoBehaviour
 {
 
-     public string weaponName = "Test";
+     public string weaponName = "FirstCannon";
      public float weaponCost;
      public float weaponCooldown = 5f;
      public float currentCooldown = 0f;

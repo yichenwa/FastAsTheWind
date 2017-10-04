@@ -14,6 +14,8 @@ public class CombatState : MonoBehaviour {
     public GameObject UIScripts; // to get a non-static reference to the ViewScript Object
     private ViewScript UI;
 
+    private GameObject playerObject;
+
     public bool combatOver;
     public bool playerWon;
 
@@ -28,6 +30,12 @@ public class CombatState : MonoBehaviour {
         // establish that combat is NOT over, and that the player has NOT won
         combatOver = false;
         playerWon = false;
+
+        if (PlayerStatus.HadWeapon == true) {
+            playerObject = player[0];
+            playerObject.AddComponent<FirstCannon>();
+        }
+
 
     }
 

@@ -34,4 +34,9 @@ public class BuyCannonballs : MonoBehaviour {
             interactionsText.text = "You're mighty kind, you are.";
         }
     }
+
+    public void buyWeapon()
+    {
+        PlayerStatus.HadWeapon = true;
+    }
 }

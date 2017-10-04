@@ -17,6 +17,8 @@ public class PlayerStatus
 
     public static int ShipHealthCurrent { get; set; }
 
+    public static bool HadWeapon { get; set; }
+
     public static Vector3 ShipPos { get; set; }
 
     public static IslandAttributes VisitingIsland { get; set; }
