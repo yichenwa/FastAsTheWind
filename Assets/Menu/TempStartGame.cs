@@ -20,5 +20,8 @@ public class TempStartGame : MonoBehaviour {
         IslandStats.IslandLocations = GetComponent<IslandGeneration>().generateIslands();
 
         SceneManager.LoadScene(SceneIndexes.WorldMap());
+
+        PlayerInventory.inventory.AddItem(new Sword(), 11);
+        PlayerInventory.inventory.AddItem(new HealthPotion(), 2);
     }
 }
