@@ -1,45 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class inventory : MonoBehaviour
 {
-	GameObject inventoryPanel;
-	GameObject slotPanel;
-    Baseitem database;
-	public GameObject inventorySlot;
-	public GameObject inventoryItem;
+  
+    public GameObject[] inven = new GameObject[12];
+    public Button[] InventoryButton = new Button[12];
 
-	private int slotAmount;
-	public List<Item> items = new List<Item>();
-	public List<GameObject> slots = new List<GameObject>();
 
-	void Start()
-	{
-        database = GetComponent<Baseitem>();
-		slotAmount = 0;
-		inventoryPanel = GameObject.Find("Inventory Panel");
-        slotPanel = inventoryPanel.transform.Find("SlotPanel").gameObject;
-		for (int i = 0; i < slotAmount; i++)
-		{
-            items.Add(new Item());
-			slots.Add(Instantiate(inventorySlot)); //add iventory slot
-			slots[i].transform.SetParent(slotPanel.transform);
-
-        }
-        // AddItem(0);
-	}
-
-    public void AddItem(int id){
-        Item itemtoadd = database.GetItemByID(id);
-        for (int i = 0; i < items.Count;i++){
-            if(items[i].ID == -1){
-                items[i] = itemtoadd;
-                GameObject itemObj = Instantiate(inventoryItem);
-                itemObj.transform.SetParent(slots[i].transform);
-                itemObj.transform.position = Vector2.zero;
+    public void addItem(GameObject item){
+        bool itemAdded = false;
+        //find the first open slot in the inventory
+        for (int i = 0; i < inven.Length;i++){
+            if(inven[i] == null){
+                inven[i] = item;
+                //update the UI, change the image of the button
+                InventoryButton[i].image.overrideSprite = item.GetComponent<SpriteRenderer>().sprite;
+                Debug.Log(item.name + "was added");
+                itemAdded = true;
+                //item.SendMessage("DoInteraction");
                 break;
             }
         }
+        // if the item not added
+        if(!itemAdded){
+            Debug.Log("Inventory is Full, Item not added");
+        }
+    }
+
+    public void RemoveItem(GameObject item){
+        for (int i = 0; i < inven.Length;i++){
+            if(inven[i] == item){
+                inven[i] = null;
+                //update the UI, change the image of the button
+                InventoryButton[i].image.overrideSprite = null;
+                Debug.Log(item.name + "was removed");
+                break;
+            }
+        }
+    }
+
+    public bool FindItem(GameObject item) { //this use for using the items in the inventory later on
+        for (int i = 0; i < inven.Length;i++){
+            if(inven[i] == item){ //find the item
+                return true;
+            }
+        }
+        return false;  //item not found
     }
 }
