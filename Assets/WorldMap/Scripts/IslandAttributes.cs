@@ -19,20 +19,20 @@ public class IslandAttributes : MonoBehaviour
     public string specialText; //Not necessary if not an island with a special button
     public string specInfo;
     public string specInfoResponse;
-    public int actions;
+    private int actions;
 
     private GameObject activePanel;
 
     public bool specialVisible;
-    private bool isDiscovered;
+    // private static bool isDiscovered;
 
 
     // Use this for initialization
     public virtual void Start()
     {
         specialVisible = false;
-        actions = 0;
-        isDiscovered = false;
+        SetActions(0);
+        //isDiscovered = false;
         specialVisible = false;
         transform.position = IslandStats.IslandLocations[islandID];
     }
@@ -48,15 +48,15 @@ public class IslandAttributes : MonoBehaviour
         hasWardsmith = wardS; hasArchetier = arch; hasSpecial = special;
     }
 
-    public void SetDiscovered()
-    {
-        isDiscovered = true;
-    }
+    //public void SetDiscovered()
+    //{
+    //    isDiscovered = true;
+    //}
 
-    public bool GetDiscovered()
-    {
-        return isDiscovered;
-    }
+    //public bool GetDiscovered()
+    //{
+    //    return isDiscovered;
+    //}
 
     public string GetName()
     {
@@ -71,6 +71,16 @@ public class IslandAttributes : MonoBehaviour
     public GameObject GetActivePanel()
     {
         return activePanel;
+    }
+
+    public void SetActions(int actionsNum)
+    {
+        actions = actionsNum;
+    }
+
+    public int GetActions()
+    {
+        return actions;
     }
 
     //Below are all the virtual classes
