@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryButton : MonoBehaviour
+public class StatMenuButton : MonoBehaviour
 {
     public Button thisButton;
 
-    public GameObject mainPanel;
-    public GameObject inventoryPanel;
+    public GameObject parentPanel;
+    public GameObject destinationPanel;
 
 	// Use this for initialization
 	void Start ()
@@ -18,8 +18,8 @@ public class InventoryButton : MonoBehaviour
 
     private void OnClickInventory()
     {
-        mainPanel.SetActive(false);
-        inventoryPanel.SetActive(true);
+        parentPanel.SetActive(false);
+        destinationPanel.SetActive(true);
     }
 
 }

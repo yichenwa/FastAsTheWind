@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerInventory : MonoBehaviour //***THIS IS A PLACEHOLDER SCRIPT. DELETE WHEN REAL INVENTORY IS IMPLEMENTED***
+public class PlayerInventory : MonoBehaviour
 {
     public static Inventory inventory = new Inventory();
 }
@@ -12,7 +12,7 @@ public class Inventory
 {
     public GameItem[] inventoryList = new GameItem[0];
 
-    private int size = 0; //Number of objects in inventoryList
+    private int size = 0; //Number of objects in inventoryList *NOT ARRAY LENGTH*
 
     public void AddItem(GameItem item, int quantity = 1)
     {
@@ -29,6 +29,7 @@ public class Inventory
                 }
                 else if (inventoryList[index].quantity == 0) //If the inventory contains 0 of a non-stackable item, replace it with the new item of the same type
                 {
+                    item.invLoc = index;
                     inventoryList[index] = item;
                     return;
                 }
@@ -43,6 +44,7 @@ public class Inventory
                 ResizeInventory();
             }
 
+            item.invLoc = size;
             inventoryList[size] = item;
             size++;
         }
@@ -75,7 +77,9 @@ public class Inventory
 
 public class GameItem
 {
-    public int quantity = 1;
+    public int quantity = 1; //0 possible, indicates that the item can be replaced by a new instance even if it isn't stackable
+    //-1 indicates that the item is in use, either by the ship or a crew member
+    public int invLoc; //0-based location in array; assigned on add
 
     public string childAttributes = "";
 
@@ -83,6 +87,11 @@ public class GameItem
     {
         if (PlayerInventory.inventory.inventoryList[index].quantity < num) return false;
         return true;
+    }
+
+    public void Drop()
+    {
+        PlayerInventory.inventory.inventoryList[invLoc].quantity--;
     }
 
     public virtual string GetName()
@@ -107,10 +116,7 @@ public class GameItem
 
     public virtual string GetAttributes()
     {
-        string stackableString = "";
-        if (GetStackable() == true) stackableString = "x" + quantity + "\n";
-        return "Name: " + GetName() + "\n" + stackableString + "Classification: " + GetItemType() + "\n" + childAttributes + 
-            "\n" + GetItemDescription();
+        return "";
     }
 }
 
@@ -177,4 +183,10 @@ public class Sword : GameItem
     {
         return "A four-foot long steel blade with a leather-bound hilt. A well made sword, but nothing to brag about.";
     }
+
+}
+
+public class ShipWeapon : GameItem
+{
+
 }

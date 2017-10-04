@@ -84,7 +84,8 @@ public class PlayerController : MonoBehaviour {
             SceneManager.LoadScene(SceneIndexes.IslandVisitation());
         }
 
-        if((Input.GetButton("Menu")) && !moveLock) //If moveLock is true, the player is either dead or in a menu. In either case, tab shouldn't open the stats panel
+        if((Input.GetButton("Menu")) && !moveLock && (player.velocity.x == 0) && (player.velocity.y == 0)) 
+            //If moveLock is true, the player is either dead or in a menu. In either case, tab shouldn't open the stats panel
         {
             moveLock = true;
 
