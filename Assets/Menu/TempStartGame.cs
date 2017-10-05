@@ -21,7 +21,7 @@ public class TempStartGame : MonoBehaviour {
 
         SceneManager.LoadScene(SceneIndexes.WorldMap());
 
-        PlayerInventory.inventory.AddItem(new Sword(), 11);
-        PlayerInventory.inventory.AddItem(new HealthPotion(), 2);
+        PlayerStatus.Inventory.AddItem(new Sword(), 11);
+        PlayerStatus.Inventory.AddItem(new HealthPotion(), 2);
     }
 }

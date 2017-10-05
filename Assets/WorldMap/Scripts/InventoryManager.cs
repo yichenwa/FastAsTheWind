@@ -16,11 +16,10 @@ public class InventoryManager : MonoBehaviour
         goldCount.text = PlayerStatus.GoldCount.ToString();
         resourcesCount.text = PlayerStatus.ResourcesCount.ToString();
 
-        for(int i = 0; i < PlayerInventory.inventory.inventoryList.Length; i++)
+        foreach (GameItem thisItem in PlayerStatus.Inventory.inventoryList)
         {
-            GameItem thisItem = PlayerInventory.inventory.inventoryList[i];
 
-            if ((thisItem != null) && (thisItem.quantity != 0))
+            if (thisItem.quantity != 0)
             {
                 GameObject button = (GameObject)GameObject.Instantiate(invItemButton); //Make a copy of the base dialogue button
                 button.SetActive(true); //As the base button is not active, new button must be set active

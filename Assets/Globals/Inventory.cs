@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerInventory : MonoBehaviour
-{
-    public static Inventory inventory = new Inventory();
-}
-
 public class Inventory
 {
-    public GameItem[] inventoryList = new GameItem[0];
+    public List<GameItem> inventoryList = new List<GameItem>();
 
     private int size = 0; //Number of objects in inventoryList *NOT ARRAY LENGTH*
 
@@ -18,7 +13,7 @@ public class Inventory
     {
         for(int i = 0; i < quantity; i++)
         {
-            int index = FindDuplicate(item);
+            int index = inventoryList.IndexOf(item);
 
             if (index >= 0) //If true, then will return if the item can be placed not at the end of the array
             {
@@ -35,43 +30,12 @@ public class Inventory
                 }
             }
 
-            if (inventoryList.Length == 0) //If the inventoryList has no size, make an array of size 10
-            {
-                inventoryList = new GameItem[10];
-            }
-            else if (size == inventoryList.Length) //If inventoryList is full, resize it to twice the size
-            {
-                ResizeInventory();
-            }
-
-            item.invLoc = size;
-            inventoryList[size] = item;
+            inventoryList.Add(item);
+            item.invLoc = inventoryList.Count;
             size++;
         }
         
         
-    }
-
-    private void ResizeInventory()
-    {
-        GameItem[] newInventory = new GameItem[inventoryList.Length * 2];
-        for (int i = 0; i < inventoryList.Length; i++)
-        {
-            newInventory[i] = inventoryList[i];
-        }
-        inventoryList = newInventory;
-
-    }
-
-    private int FindDuplicate(GameItem item)
-    {
-        for (int i = 0; i < inventoryList.Length; i++)
-        {
-            if (inventoryList[i] == null) return -1;
-            if (inventoryList[i].GetName() == item.GetName()) return i;
-        }
-
-        return -1;
     }
 }
 
@@ -81,17 +45,22 @@ public class GameItem
     //-1 indicates that the item is in use, either by the ship or a crew member
     public int invLoc; //0-based location in array; assigned on add
 
+    public int value; //true value of the item in coins
+
     public string childAttributes = "";
 
-    public bool Use(int index, int num = 0) //Returns true, unless there is no item to use
+    public bool canUse(int num = 1) //Returns true, unless there is no item to use
     {
-        if (PlayerInventory.inventory.inventoryList[index].quantity < num) return false;
+        if (quantity < num) return false;
+
         return true;
     }
 
     public void Drop()
     {
-        PlayerInventory.inventory.inventoryList[invLoc].quantity--;
+        PlayerStatus.Inventory.inventoryList[invLoc].quantity--;
+        if (PlayerStatus.Inventory.inventoryList[invLoc].quantity == 0)
+            PlayerStatus.Inventory.inventoryList.RemoveAt(invLoc);
     }
 
     public virtual string GetName()
@@ -188,5 +157,37 @@ public class Sword : GameItem
 
 public class ShipWeapon : GameItem
 {
+    public string ammoType;
+    public int cooldown;
+    
+    /*
+    public override string GetAttributes()
+    {
+        childAttributes = "Material: " + material + "\n" + "Condition: " + condition;
+        string stackableString = "";
+        if (GetStackable() == true) stackableString = "x" + quantity + "\n";
+        return "Name: " + GetName() + "\n" + stackableString + "Classification: " + GetItemType() + "\n" +
+            "Material: " + material + "\n" + "Condition: " + condition + "\n" + GetItemDescription();
+    }
+    */
 
+    public override string GetName()
+    {
+        return "Sword";
+    }
+
+    public override string GetItemType()
+    {
+        return "Weapon";
+    }
+
+    public override bool GetStackable()
+    {
+        return false;
+    }
+
+    public override string GetItemDescription()
+    {
+        return "A large, reliable naval cannon";
+    }
 }

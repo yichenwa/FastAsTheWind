@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerStatus
 {
+    public static Inventory Inventory = new Inventory();
 
     public static int GoldCount { get; set; }
 
