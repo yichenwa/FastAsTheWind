@@ -21,6 +21,16 @@ public class TempStartGame : MonoBehaviour {
 
         SceneManager.LoadScene(SceneIndexes.WorldMap());
 
+        PlayerStatus.Ship = new Ship(
+                                          "FTL",                            // name
+                                          "Your trusty old sloop. She may not be much, but she served you well during your time as a merchant.", // description
+                                          1000,                             // value
+                                          Ship.ShipClass.SLOOP,             // ship class
+                                          100,                              // base hull health
+                                          10,                               // base/necessary crew health/count
+                                          50                                // base sail health
+            );
+
         for (int i = 0; i < 10; i++)
             PlayerStatus.Inventory.AddItem(new CrewWeapon(
                                             "Sword",                        // name
