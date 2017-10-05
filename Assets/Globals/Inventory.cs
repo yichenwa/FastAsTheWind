@@ -11,41 +11,74 @@ public class Inventory
 
     public void AddItem(GameItem item, int quantity = 1)
     {
-        for(int i = 0; i < quantity; i++)
+        int index = inventoryList.FindIndex(x => x.GetName().Equals(item.GetName(), StringComparison.Ordinal)); // in short, looks for a GameItem in inventory with same name as item
+
+        if (index >= 0) //If true, then will return if the item can be placed not at the end of the array
         {
-            int index = inventoryList.IndexOf(item);
-
-            if (index >= 0) //If true, then will return if the item can be placed not at the end of the array
+            if (item.GetStackable())
             {
-                if (item.GetStackable())
-                {
-                    inventoryList[index].quantity += quantity;
-                    return;
-                }
-                else if (inventoryList[index].quantity == 0) //If the inventory contains 0 of a non-stackable item, replace it with the new item of the same type
-                {
-                    item.invLoc = index;
-                    inventoryList[index] = item;
-                    return;
-                }
+                inventoryList[index].quantity += quantity;
+                size += quantity;
+                Debug.Log("Added " + quantity.ToString() + " " + item.GetName() + " to player inventory");
+                return;
             }
-
-            inventoryList.Add(item);
-            item.invLoc = inventoryList.Count;
-            size++;
+            else if (inventoryList[index].quantity == 0) //If the inventory contains 0 of a non-stackable item, replace it with the new item of the same name
+            {
+                item.invLoc = index;
+                inventoryList[index] = item;
+                size++;
+                Debug.Log("Added a " + item.GetName() + " to player inventory");
+                return;
+            }
+            else
+            {
+                inventoryList.Insert(inventoryList.Count, item);
+                item.invLoc = inventoryList.Count - 1;
+                Debug.Log("Added a " + item.GetName() + " to player inventory");
+                size++;
+            }
         }
-        
-        
+        else
+        {
+            inventoryList.Insert(inventoryList.Count, item);
+            item.invLoc = inventoryList.Count-1;
+            if (item.GetStackable())
+            {
+                inventoryList[inventoryList.Count-1].quantity = quantity;
+                size += quantity;
+                Debug.Log("Added " + quantity.ToString() + " " + item.GetName() + "(s) to player inventory");
+            }
+            else
+            {
+                Debug.Log("Added a " + item.GetName() + " to player inventory");
+                size++;
+            }
+        }
+    }
+    
+    public Boolean RemoveItem(GameItem item)
+    {
+        if (item.quantity <= 0)
+            return false;
+
+        item.quantity--;
+        size--;
+        return true;
+    }
+
+    public int inventoryPosition(GameItem item)
+    {
+        return 0;
     }
 }
 
-public class GameItem
+public abstract class GameItem
 {
+    public int id;
+
     public int quantity = 1; //0 possible, indicates that the item can be replaced by a new instance even if it isn't stackable
     //-1 indicates that the item is in use, either by the ship or a crew member
     public int invLoc; //0-based location in array; assigned on add
-
-    public int value; //true value of the item in coins
 
     public string childAttributes = "";
 
@@ -58,49 +91,57 @@ public class GameItem
 
     public void Drop()
     {
-        PlayerStatus.Inventory.inventoryList[invLoc].quantity--;
-        if (PlayerStatus.Inventory.inventoryList[invLoc].quantity == 0)
-            PlayerStatus.Inventory.inventoryList.RemoveAt(invLoc);
+        PlayerStatus.Inventory.RemoveItem(this);
     }
 
-    public virtual string GetName()
+    public abstract string GetName();
+
+    public abstract string GetItemType();
+
+    public abstract string GetItemDescription();
+
+    public abstract int getValue();
+
+    public abstract bool GetStackable();
+
+    public string stackableString()
     {
+        if (GetStackable() == true) return "Quantity: " + quantity + "\n";
         return "";
     }
 
-    public virtual string GetItemType()
-    {
-        return "";
-    }
-
-    public virtual string GetItemDescription()
-    {
-        return "";
-    }
-
-    public virtual bool GetStackable()
-    {
-        return false;
-    }
-
-    public virtual string GetAttributes()
-    {
-        return "";
-    }
+    public abstract string GetAttributes();
 }
 
-public class HealthPotion : GameItem
-{ 
-    public override string GetAttributes()
+public class Consumable : GameItem
+{
+
+    public enum Effect
     {
-        string stackableString = "x" + quantity + "\n";
-        if (GetStackable() == true) stackableString = "x" + quantity + "\n";
-        return "Name: " + GetName() + "\n" + stackableString + "Classification: " + GetItemType() + "\n" + GetItemDescription();
+        HEAL,
+        DAMAGE
+    }
+
+    public readonly string _name;
+    public readonly string _description;
+    public readonly int _value;
+    public readonly Effect _effect;
+    public readonly int _magnitude;
+    public readonly bool _stackable;
+
+    public Consumable(string name, string description, int value, Effect effect, int magnitude, bool stackable = true)
+    {
+        _name = name;
+        _description = description;
+        _value = value;
+        _effect = effect;
+        _magnitude = magnitude;
+        _stackable = stackable;
     }
 
     public override string GetName()
     {
-        return "Health Potion";
+        return _name;
     }
 
     public override string GetItemType()
@@ -108,39 +149,96 @@ public class HealthPotion : GameItem
         return "Consumable";
     }
 
-    public override bool GetStackable()
+    public string GetEffect()
     {
-        return true;
+        if (_effect == Effect.HEAL)
+            return "Heals";
+        else if (_effect == Effect.DAMAGE)
+            return "Damages";
+        else
+            return "Unknown";
     }
 
     public override string GetItemDescription()
     {
-        return "A blood-red potion, used to magically heal an individual's wounds.";
+        return _description;
     }
-}
 
-public class Sword : GameItem
-{
-    private string material = "Steel";
-    private int condition = 100;
+    public override int getValue()
+    {
+        return _value;
+    }
+
+    public override bool GetStackable()
+    {
+        return _stackable;
+    }
 
     public override string GetAttributes()
     {
-        childAttributes = "Material: " + material + "\n" + "Condition: " + condition;
-        string stackableString = "";
-        if (GetStackable() == true) stackableString = "x" + quantity + "\n";
-        return "Name: " + GetName() + "\n" + stackableString + "Classification: " + GetItemType() + "\n" +
-            "Material: " + material + "\n" + "Condition: " + condition + "\n" + GetItemDescription();
+        childAttributes = "Material: " + GetEffect() + "\n" + "Strength: " + _magnitude;
+
+        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + _value + "\n\n"
+            + childAttributes + "\n\n"
+            + GetItemDescription();
+    }
+}
+
+public class CrewWeapon : GameItem
+{
+    public enum WeaponMaterial
+    {
+        STEEL,
+        IRON
+    }
+
+    public readonly string _name;
+    public readonly string _description;
+    public readonly int _value;
+    public readonly WeaponMaterial _material;
+    public readonly int _condition;
+    public readonly int _maxCondition;
+    public readonly int _damage;
+
+    public CrewWeapon(string name, string description, int value, WeaponMaterial material, int condition, int maxCondition, int damage)
+    {
+        _name = name;
+        _description = description;
+        _value = value;
+        _material = material;
+        _condition = condition;
+        _maxCondition = maxCondition;
+        _damage = damage;
     }
 
     public override string GetName()
     {
-        return "Sword";
+        return _name;
     }
 
     public override string GetItemType()
     {
-        return "Weapon";
+        return "Personal Weapon";
+    }
+
+    public string GetWeaponMaterial()
+    {
+        if (_material == WeaponMaterial.IRON)
+            return "Iron";
+        else if (_material == WeaponMaterial.STEEL)
+            return "Steel";
+        else
+            return "Unknown";
+    }
+
+    public override string GetItemDescription()
+    {
+        return _description;
+    }
+
+    public override int getValue()
+    {
+        return _value;
     }
 
     public override bool GetStackable()
@@ -148,46 +246,180 @@ public class Sword : GameItem
         return false;
     }
 
-    public override string GetItemDescription()
+    public override string GetAttributes()
     {
-        return "A four-foot long steel blade with a leather-bound hilt. A well made sword, but nothing to brag about.";
+        childAttributes = "Material: " + GetWeaponMaterial() + "\n" + "Condition: " + _condition + "/" + _maxCondition + "\n" + "Damage: " + _damage;
+
+        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + _value + "\n\n"
+            + childAttributes + "\n\n"
+            + GetItemDescription();
     }
 
 }
 
 public class ShipWeapon : GameItem
 {
-    public string ammoType;
-    public int cooldown;
-    
-    /*
-    public override string GetAttributes()
+
+    public enum WeaponType
     {
-        childAttributes = "Material: " + material + "\n" + "Condition: " + condition;
-        string stackableString = "";
-        if (GetStackable() == true) stackableString = "x" + quantity + "\n";
-        return "Name: " + GetName() + "\n" + stackableString + "Classification: " + GetItemType() + "\n" +
-            "Material: " + material + "\n" + "Condition: " + condition + "\n" + GetItemDescription();
+        CANNON,
+        SPELL,
+        MELEE
     }
-    */
+
+    public readonly string _name;
+    public readonly string _description;
+    public readonly int _value;
+    public readonly WeaponType _weaponType;
+    public readonly Ammunition.AmmoType _ammoType;
+    public readonly int _cooldown;
+    public readonly int _damage;
+
+    public ShipWeapon(string name, string description, int value, WeaponType weaponType, Ammunition.AmmoType ammoType, int cooldown, int damage)
+    {
+        _name = name;
+        _description = description;
+        _value = value;
+        _weaponType = weaponType;
+        _ammoType = ammoType;
+        _cooldown = cooldown;
+        _damage = damage;
+    }
+
+    
 
     public override string GetName()
     {
-        return "Sword";
+        return _name;
     }
 
     public override string GetItemType()
     {
-        return "Weapon";
+        return "Ship Weapon";
+
+    }
+
+    public string GetWeaponType()
+    {
+        if (_weaponType == WeaponType.CANNON)
+            return "Cannon";
+        else if (_weaponType == WeaponType.SPELL)
+            return "Spell";
+        else
+            return "Unknown";
+    }
+
+    public string GetAmmoType()
+    {
+        if (_ammoType == Ammunition.AmmoType.CANNONBALL)
+            return "Cannon Balls";
+        else if (_ammoType == Ammunition.AmmoType.MANASHARD)
+            return "Mana Shards";
+        else
+            return "Unknown";
+
+    }
+
+    public override string GetItemDescription()
+    {
+        return _description;
+    }
+
+    public override int getValue()
+    {
+        return _value;
+    }
+
+    public override string GetAttributes()
+    {
+        childAttributes = "Weapon Type: " + GetWeaponType() + "\n" + "Ammunition: " + GetAmmoType() + "\n" + "Damage: " + _damage + "\n" + "Cooldown: " + _cooldown;
+        
+        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + getValue() + "\n\n"
+            + childAttributes + "\n\n" 
+            + GetItemDescription();
     }
 
     public override bool GetStackable()
     {
         return false;
     }
+}
+
+public class Ammunition : GameItem
+{
+    public enum AmmoType
+    {
+        CANNONBALL,
+        MANASHARD,
+        NONE
+    }
+
+    public readonly string _name;
+    public readonly string _description;
+    public readonly int _value;
+    public readonly AmmoType _ammoType;
+    public readonly int _hullDamage;
+    public readonly int _crewDamage;
+    public readonly int _sailDamage;
+    public readonly bool _stackable;
+
+    public Ammunition(string name, string description, int value, AmmoType ammoType, int hullDamage, int crewDamage, int sailDamage, bool stackable = true)
+    {
+        _name = name;
+        _description = description;
+        _value = value;
+        _ammoType = ammoType;
+        _hullDamage = hullDamage;
+        _crewDamage = crewDamage;
+        _sailDamage = sailDamage;
+        _stackable = stackable;
+    }
+
+
+
+    public override string GetName()
+    {
+        return _name;
+    }
+
+    public override string GetItemType()
+    {
+        return "Ammunition";
+
+    }
+
+    public string GetAmmoType()
+    {
+        if (_ammoType == AmmoType.CANNONBALL)
+            return "Cannon Balls";
+        else if (_ammoType == AmmoType.MANASHARD)
+            return "Mana Shards";
+        else
+            return "Unknown";
+
+    }
 
     public override string GetItemDescription()
     {
-        return "A large, reliable naval cannon";
+        return _description;
+    }
+
+    public override int getValue()
+    {
+        return _value;
+    }
+
+    public override string GetAttributes()
+    {
+        childAttributes = "Ammunition Type: " + GetAmmoType() + "\n" + "Hull Damage: x" + _hullDamage + "\n" + "Crew Damage: x" + _crewDamage + "\n" + "Sail Damage: x" + _sailDamage;
+
+        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + getValue() + "\n\n"
+            + childAttributes + "\n\n"
+            + GetItemDescription();
+    }
+
+    public override bool GetStackable()
+    {
+        return _stackable;
     }
 }
