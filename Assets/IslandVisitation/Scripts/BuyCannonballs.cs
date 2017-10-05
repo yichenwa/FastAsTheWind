@@ -37,6 +37,6 @@ public class BuyCannonballs : MonoBehaviour {
 
     public void buyWeapon()
     {
-        PlayerStatus.HadWeapon = true;
+        PlayerStatus.HadMoreWeapon = true;
     }
 }

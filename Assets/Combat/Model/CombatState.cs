@@ -6,7 +6,7 @@ public class CombatState : MonoBehaviour {
 
     //Queue of attacks
     public Queue<Turns> actions = new Queue<Turns>();
-    //List if the player ships.
+    //List of the player ships.
     public List<GameObject> player = new List<GameObject>();
     //List of enemys.
     public List<GameObject> enemy = new List<GameObject>();
@@ -31,9 +31,15 @@ public class CombatState : MonoBehaviour {
         combatOver = false;
         playerWon = false;
 
-        if (PlayerStatus.HadWeapon == true) {
-            playerObject = player[0];
-            playerObject.AddComponent<FirstCannon>();
+        playerObject = player[0];
+
+        playerObject.AddComponent<BigCannon>();
+
+        if (PlayerStatus.HadMoreWeapon == true) {
+            
+            playerObject.AddComponent<SmallCannon>();
+            playerObject.AddComponent<SmallCannon>();
+            playerObject.AddComponent<SmallCannon>();
         }
 
 
@@ -46,7 +52,7 @@ public class CombatState : MonoBehaviour {
 
         //Judge if the next attack is from the enemy or player. Kind of bad. Should change. 
         if (actions.Count > 0) {
-            if (actions.Peek().attackerName == "FTL")
+            if(actions.Peek().attackerName == "FTL")
             {
                 PlayerDoDamage(actions.Dequeue());
             }
@@ -67,6 +73,8 @@ public class CombatState : MonoBehaviour {
         PlayerShipState test = input.attackerObject.GetComponent<PlayerShipState>();
         EnemyShipState test2 = input.targetObject.GetComponent<EnemyShipState>();
         test2.enemy.shipHealth = test2.enemy.shipHealth - input.test.weaponAttack;
+        EnemyStatus.ShipHealthCurrent = (int)test2.enemy.shipHealth;
+        PlayerStatus.AmmoCount = PlayerStatus.AmmoCount - 1;
         input.test.reset();
         UI.printToCombatLog("The " + test.player.shipName + " dealt " + input.test.weaponAttack.ToString() + " damage to the " + test2.enemy.shipName + "!");
         if (test2.enemy.shipHealth <= 0)
@@ -85,8 +93,9 @@ public class CombatState : MonoBehaviour {
     {
         EnemyShipState test = input.attackerObject.GetComponent<EnemyShipState>();
         PlayerShipState test2 = input.targetObject.GetComponent<PlayerShipState>();
-        test2.player.shipHealth = test2.player.shipHealth - test.cannon.weaponAttack;
-        UI.printToCombatLog("The " + test.enemy.shipName + " dealt " + test.cannon.weaponAttack.ToString() + " damage to the " + test2.player.shipName + "!");
+        test2.player.shipHealth = test2.player.shipHealth - input.test.weaponAttack;
+       
+        UI.printToCombatLog("The " + test.enemy.shipName + " dealt " + input.test.weaponAttack.ToString() + " damage to the " + test2.player.shipName + "!");
         if (test2.player.shipHealth <= 0)
         {
             Destroy(input.targetObject);

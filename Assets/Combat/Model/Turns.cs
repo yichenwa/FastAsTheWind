@@ -11,6 +11,7 @@ public class Turns{
     public GameObject attackerObject;
     public GameObject targetObject;
     public FirstCannon test;
+    public bool PlayerorEnemy;
    
 
 }

@@ -5,14 +5,20 @@ using UnityEngine;
 public class FirstCannon : MonoBehaviour
 {
 
-     public string weaponName = "FirstCannon";
-     public float weaponCost;
-     public float weaponCooldown = 5f;
-     public float currentCooldown = 0f;
-     public float weaponAttack = 50f;
+     public string weaponName {get; set;}
+     public float weaponCooldown {get; set;}
+     public float currentCooldown {get; set;}
+     public float weaponAttack {get; set;}
 
-     //States that the weapon could be in.
-     public enum States
+    //The current state the weapon is in.
+    public States currentState;
+
+    private CombatState CSM;
+
+    private GameObject self;
+
+    //States that the weapon could be in.
+    public enum States
      {
        PROCESSING,
        WAITING,
@@ -22,20 +28,16 @@ public class FirstCannon : MonoBehaviour
        DEAD
      }
 
-     //The current state the weapon is in.
-     public States currentState;
-     private CombatState CSM;
-
-
-    void Start () {
+    protected virtual void Start () {
         // First state where the weapon will count up until it can be used.
         currentState = States.PROCESSING;
         CSM = GameObject.Find("Combat Manager").GetComponent<CombatState>();
+        self = this.gameObject;
     }
 	
-	void Update () {
+	protected virtual void Update () {
 
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
 
         //Switch case for the weapon states.
         //As long as the weapon is in processing, the current cooldown will count up.
@@ -63,8 +65,6 @@ public class FirstCannon : MonoBehaviour
         }
     }
 
-
-
     //Will count up until it reaches the weapon cooldown time. When it reaches the cooldown time it will change states.
     void advanceCooldown()
     {
@@ -75,46 +75,45 @@ public class FirstCannon : MonoBehaviour
         }
     }
 
-   public void fire() {
+   virtual public void fire() {
         if (currentState == States.WAITING) {
             currentState = States.SELECTING;
         }
     }
 
-    public void target(GameObject target) {
+    virtual public void target(GameObject target, string name) {
         if (currentState == States.SELECTING) {
             currentState = States.QUEUE;
-            attackTarget(target);
+            attackTarget(target, name);
         }
     }
 
-    void attackTarget(GameObject target)
+    void attackTarget(GameObject target, string name)
     {
         //Create a new "Turn"
         //Gets attacker Objets and target Objects from Combat State CSM.    
         Turns basicAttack = new Turns();
-        basicAttack.attackerName = "FTL";
-        basicAttack.attackerObject = CSM.player[0];
-        basicAttack.targetObject = CSM.enemy[0];
+        basicAttack.attackerName = name;
+        basicAttack.attackerObject = self;
+        basicAttack.targetObject = target;
         basicAttack.test = this;
         //Add to the attack queue.
-        PlayerStatus.AmmoCount = PlayerStatus.AmmoCount - 1;
         CSM.Add(basicAttack);
     }
 
-    public void reset()
+    virtual public void reset()
     {
         currentCooldown = 0f;
         currentState = States.PROCESSING;
     }
 
     //tells player ship to make an attack. returns true if attack is made, false if on cooldown 
-    public bool canFire() // returns true if allowed to attack
+    virtual public bool canFire() // returns true if allowed to attack
     {
         return (currentState == States.WAITING && PlayerStatus.AmmoCount > 0);
     }
 
-    public bool canTarget() // returns true if allowed to attack
+    virtual public bool canTarget() // returns true if allowed to attack
     {
         return (currentState == States.SELECTING && PlayerStatus.AmmoCount > 0);
     }

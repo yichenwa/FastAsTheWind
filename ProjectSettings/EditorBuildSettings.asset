@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Battle.unity
     guid: f5f11b90b2b37ad498af7fded0ad414d
   - enabled: 1
-    path: Assets/Combat/Battle.unity
+    path: Assets/Combat/Scenes/Battle.unity
     guid: 8307326f5396a1e428bfad5504c9a67a
   - enabled: 1
     path: Assets/IslandVisitation/IslandVisitation.unity

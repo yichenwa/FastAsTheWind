@@ -14,7 +14,8 @@ public class TempStartGame : MonoBehaviour {
         PlayerStatus.ShipHealthMax = 100;
         PlayerStatus.ShipHealthCurrent = 100;
         PlayerStatus.AmmoCount = 20;
-        PlayerStatus.HadWeapon = false;
+        PlayerStatus.HadWeapon = true;
+        PlayerStatus.HadMoreWeapon = false;
 
         QuestsStatus.testQuestStatus = -1;
 
