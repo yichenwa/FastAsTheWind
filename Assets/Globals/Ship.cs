@@ -11,22 +11,23 @@ public class Ship {
         KRAKEN
     }
 
-    public readonly string _name;
-    public readonly string _description;
-    public readonly int _value;
-    public readonly ShipClass _shipClass;
+    public readonly string _name; // name of the ship
+    public readonly string _description; // description of the ship
+    public readonly int _value; // value of the ship
+    public readonly ShipClass _shipClass; // class of the ship
 
-    private readonly int _hullHealthMaxBase;
-    public int _hullHealth;
+    private readonly int _hullHealthMaxBase; // hull health of the ship without any upgrades
+    public int _hullHealth; // current hull health of the ship
 
-    private readonly int _crewHealthMaxBase;
-    public int _crewHealth;
+    private readonly int _crewHealthMaxBase; // crew health of the ship without any upgrades
+    public int _crewHealth; // current crew health of the ship
 
-    private readonly int _sailHealthMaxBase;
-    public int _sailHealth;
+    private readonly int _sailHealthMaxBase; // sail health of the ship without any upgrades
+    public int _sailHealth; // current sail health of the ship
 
-    public int slotCount;
-    public WeaponSlot[] weaponSlots;
+    private int slotCount;
+    private WeaponSlot[] weaponSlots;
+    private bool initialized = false;
 
 
     public Ship (string name, string description, int value, ShipClass shipClass, int hullHealthMaxBase, int crewHealthMaxBase, int sailHealthMaxBase)
@@ -47,23 +48,29 @@ public class Ship {
         InitializeWeaponSlots();
     }
 
-    public int HullStrengthMax()
+    public int HullStrengthMax() // returns maximum hull strength after all upgrades
     {
         return _hullHealthMaxBase;
     }
 
-    public int CrewStrengthMax()
+    public int CrewStrengthMax() // returns maximum crew strength after all upgrades
     {
         return _crewHealthMaxBase;
     }
 
-    public int SailStrengthMax()
+    public int SailStrengthMax() // returns maximum sail strength after all upgrades
     {
         return _sailHealthMaxBase;
     }
 
-    private void InitializeWeaponSlots()
+    private void InitializeWeaponSlots() // initailizes the ship's weapons based on its class. Probably will be replaced.
     {
+        if (initialized)
+        {
+            Debug.LogError("The ship " + _name + " has already been initialized!");
+            return;
+        }
+
         switch (_shipClass)
         {
             case ShipClass.SLOOP: // Sloops have 4 slots for cannons
@@ -102,21 +109,83 @@ public class Ship {
                 break;
         }
     }
+
+    public ShipWeapon.WeaponType[] getValidWeapons(int slot) // Returns an array of all WeaponTypes the slot accepts
+    {
+        if (slot >= slotCount)
+            return null;
+        return weaponSlots[slot].validTypes();
+    }
+
+    public bool isValidWeapon (ShipWeapon weapon, int slot) // See if a weapon is valid. should be called before equipWeapon to avoid error
+    {
+        if (slot >= slotCount)
+            return false;
+        if (!weaponSlots[slot].validWeapon(weapon))
+            return false;
+        return true;
+    }
+
+    public bool equipWeapon (ShipWeapon weapon, int slot) // Attempt to equip weapon to this slot, returns true if equipped, false otherwise.
+    {
+        if (slot >= slotCount)
+        {
+            Debug.LogError("ERR: slot " + slot + " is not a valid slot on ship " + _name);
+            return false;
+        }
+        if (!weaponSlots[slot].validWeapon(weapon))
+        {
+            Debug.LogError("ERR: weapon type " + weapon._weaponType + " is not a valid type for slot " + slot + " on ship " + _name + ". valid types are: " + weaponSlots[slot].validTypesString());
+            return false;
+        }
+
+        weaponSlots[slot].equippedWeapon = weapon;
+        return true;
+    }
+    
+    public ShipWeapon getWeapon(int slot) // WARNING: CAN BE NULL!
+    {
+        if (slot > slotCount)
+        {
+            Debug.LogError("ERR: slot " + slot + " is not a valid slot on ship " + _name);
+            return null;
+        }
+
+        return weaponSlots[slot].equippedWeapon;
+    }
 }
 
 public class WeaponSlot
 {
     private HashSet<ShipWeapon.WeaponType> acceptedTypes;
+    private int numTypes;
     public ShipWeapon equippedWeapon;
 
     public WeaponSlot()
     {
         acceptedTypes = new HashSet<ShipWeapon.WeaponType>();
+        numTypes = 0;
+    }
+
+    public ShipWeapon.WeaponType[] validTypes()
+    {
+        ShipWeapon.WeaponType[] a = new ShipWeapon.WeaponType[numTypes];
+        acceptedTypes.CopyTo(a);
+        return a;
+    }
+
+    public string validTypesString()
+    {
+        string s = "";
+        foreach (ShipWeapon.WeaponType type in acceptedTypes)
+            s += ", " + type;
+        return s.Substring(2);
     }
 
     public void addType(ShipWeapon.WeaponType weaponType)
     {
         acceptedTypes.Add(weaponType);
+        numTypes++;
     }
 
     public bool validWeapon(ShipWeapon weapon)
