@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
     public Text enterPrompt;
 
     public GameObject statsPanel;
+    public GameObject savePanel;
 
     public int visitationSceneIndex;
     public int battleSceneIndex;
@@ -93,6 +94,17 @@ public class PlayerController : MonoBehaviour {
             resourcesCount.text = "";
 
             statsPanel.SetActive(true);
+        }
+
+        if(Input.GetButton("Save") && !moveLock && (player.velocity.x == 0) && (player.velocity.y == 0))
+
+        {
+            moveLock = true;
+
+            goldCount.text = "";
+            resourcesCount.text = "";
+
+            savePanel.SetActive(true);
         }
 
         if (!moveLock) //With the if statement, the gold count and resources count will be reset upon leaving the stats menu
