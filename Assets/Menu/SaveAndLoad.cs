@@ -81,6 +81,7 @@ public class SaveAndLoad : MonoBehaviour
 
     public void CopySaveData()
     {
+        //Player Globals
         data.ResourcesCount = PlayerStatus.ResourcesCount;
         data.GoldCount = PlayerStatus.GoldCount;
         data.ShipPos = Vector3ToSerVector3(PlayerStatus.ShipPos);
@@ -88,17 +89,34 @@ public class SaveAndLoad : MonoBehaviour
         data.ShipHealthCurrent = PlayerStatus.ShipHealthCurrent;
         data.AmmoCount = PlayerStatus.AmmoCount;
 
+        //island globals
         data.islandLocations = new List<SerVector3>();
 
         foreach (Vector3 v3 in IslandStats.IslandLocations)
         {
             data.islandLocations.Add(Vector3ToSerVector3(v3));
         }
-        ///copy globals into save data here
+
+        //Enemy Globals
+        data.enemyShipHelthMax = EnemyStatus.ShipHealthMax;
+        data.enemyShipHealthCurrent = EnemyStatus.ShipHealthCurrent;
+        data.enemyGoldCount = EnemyStatus.GoldCount;
+        data.enemyResourceCount = EnemyStatus.ResourcesCount;
+        data.enemyAmmoCount = EnemyStatus.AmmoCount;
+
+        //Quest Status Globals
+        data.questStatusTest = QuestsStatus.testQuestStatus;
+
+        //Ship Globals
+
+        //Inventory Globals
+
+        //copy globals into save data here
     }
 
     public void CopyLoadData()
     {
+        //Player Globals
         PlayerStatus.ResourcesCount = data.ResourcesCount;
         PlayerStatus.GoldCount = data.GoldCount;
         PlayerStatus.ShipPos = SerVector3ToVector3(data.ShipPos);
@@ -106,13 +124,31 @@ public class SaveAndLoad : MonoBehaviour
         PlayerStatus.ShipHealthCurrent = data.ShipHealthCurrent;
         PlayerStatus.AmmoCount = data.AmmoCount;
 
+
+        //Island Globals
         IslandStats.IslandLocations = new List<Vector3>();
 
         foreach(SerVector3 sv3 in data.islandLocations)
         {
             IslandStats.IslandLocations.Add(SerVector3ToVector3(sv3));
         }
+
+        //Enemy Globals
+        EnemyStatus.ShipHealthMax = data.enemyShipHelthMax;
+        EnemyStatus.ShipHealthCurrent = data.enemyShipHealthCurrent;
+        EnemyStatus.GoldCount = data.enemyGoldCount;
+        EnemyStatus.ResourcesCount = data.enemyResourceCount;
+        EnemyStatus.AmmoCount = data.enemyResourceCount;
+
+        //Quest Status Globals
+        QuestsStatus.testQuestStatus = data.questStatusTest;
+
+        //Ship Globals
         
+        //Inventory Globals
+
+
+
         //copy globals to globals from save data here
     }
 }
@@ -135,10 +171,17 @@ public class Savedata
     public int ShipHealthCurrent;
     public int AmmoCount;
 
-    //Island stat globals
-
+    //Island Stat globals
     public List<SerVector3> islandLocations;
 
+    //Enemy Stat Globals
+    public int enemyShipHelthMax;
+    public int enemyShipHealthCurrent;
+    public int enemyGoldCount;
+    public int enemyResourceCount;
+    public int enemyAmmoCount;
 
+    //Quest Status Globals
+    public int questStatusTest;
 
 }
