@@ -88,13 +88,13 @@ public class SaveAndLoad : MonoBehaviour
         data.ShipHealthCurrent = PlayerStatus.ShipHealthCurrent;
         data.AmmoCount = PlayerStatus.AmmoCount;
 
-        //data.islandLocations.Clear();
+        data.islandLocations = new List<SerVector3>();
 
-        //foreach (Vector3 v3 in IslandStats.IslandLocations)
-        //{
-        //    data.islandLocations.Add(Vector3ToSerVector3(v3));
-        //}
-        //copy globals into save data here
+        foreach (Vector3 v3 in IslandStats.IslandLocations)
+        {
+            data.islandLocations.Add(Vector3ToSerVector3(v3));
+        }
+        ///copy globals into save data here
     }
 
     public void CopyLoadData()
@@ -106,12 +106,12 @@ public class SaveAndLoad : MonoBehaviour
         PlayerStatus.ShipHealthCurrent = data.ShipHealthCurrent;
         PlayerStatus.AmmoCount = data.AmmoCount;
 
-        //IslandStats.IslandLocations = new List<Vector3>();
+        IslandStats.IslandLocations = new List<Vector3>();
 
-        //foreach(SerVector3 sv3 in data.islandLocations)
-        //{
-        //    IslandStats.IslandLocations.Add(SerVector3ToVector3(sv3));
-        //}
+        foreach(SerVector3 sv3 in data.islandLocations)
+        {
+            IslandStats.IslandLocations.Add(SerVector3ToVector3(sv3));
+        }
         
         //copy globals to globals from save data here
     }
