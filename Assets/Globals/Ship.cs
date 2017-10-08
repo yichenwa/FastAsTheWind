@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[System.Serializable]
 public class Ship {
 
     public enum ShipClass
@@ -160,16 +160,16 @@ public class Ship {
     public int GetSlotNumber() { return slotCount; }
 }
 
-
+[System.Serializable]
 public class WeaponSlot
 {
-    private HashSet<ShipWeapon.WeaponType> acceptedTypes;
+    private List<ShipWeapon.WeaponType> acceptedTypes;
     private int numTypes;
     public ShipWeapon equippedWeapon;
 
     public WeaponSlot()
     {
-        acceptedTypes = new HashSet<ShipWeapon.WeaponType>();
+        acceptedTypes = new List<ShipWeapon.WeaponType>();
         numTypes = 0;
     }
 
@@ -190,8 +190,12 @@ public class WeaponSlot
 
     public void addType(ShipWeapon.WeaponType weaponType)
     {
-        acceptedTypes.Add(weaponType);
-        numTypes++;
+        if (!acceptedTypes.Contains(weaponType))
+        {
+            acceptedTypes.Add(weaponType);
+            numTypes++;
+        }
+        
     }
 
     public bool validWeapon(ShipWeapon weapon)

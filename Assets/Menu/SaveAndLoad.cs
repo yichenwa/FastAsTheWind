@@ -114,7 +114,7 @@ public class SaveAndLoad : MonoBehaviour
         data.questStatusTest = QuestsStatus.testQuestStatus;
 
         //Ship Globals
-        //data.ship = PlayerStatus.Ship;
+        data.ship = PlayerStatus.Ship;
         //Inventory Globals
         data.inventory = new List<GameItem>();
         foreach(GameItem item in PlayerStatus.Inventory.inventoryList)
@@ -155,7 +155,7 @@ public class SaveAndLoad : MonoBehaviour
         QuestsStatus.testQuestStatus = data.questStatusTest;
 
         //Ship Globals
-        //PlayerStatus.Ship = data.ship;
+        PlayerStatus.Ship = data.ship;
 
         //Inventory Globals
         Inventory inventory = new Inventory();
@@ -203,7 +203,7 @@ public class Savedata
     public int questStatusTest;
 
     //Ship Globals
-    //public Ship ship;
+    public Ship ship;
 
     //Inventory Globals
     public List<GameItem> inventory;
