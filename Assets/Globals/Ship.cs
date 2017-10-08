@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Ship {
 
     public enum ShipClass
@@ -153,7 +154,12 @@ public class Ship {
 
         return weaponSlots[slot].equippedWeapon;
     }
+
+    public WeaponSlot[] GetWeaponSlots() { return weaponSlots;}
+
+    public int GetSlotNumber() { return slotCount; }
 }
+
 
 public class WeaponSlot
 {

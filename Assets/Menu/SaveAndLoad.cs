@@ -55,6 +55,11 @@ public class SaveAndLoad : MonoBehaviour
         file.Close();
     }
 
+    //public static SerGameItem GameItemToSerGameItem(GameItem item)
+    //{
+
+    //}
+
     public static SerVector3 Vector3ToSerVector3(Vector3 v3)
     {
         SerVector3 sv3 = new SerVector3
@@ -78,6 +83,7 @@ public class SaveAndLoad : MonoBehaviour
 
         return v3;
     }
+
 
     public void CopySaveData()
     {
@@ -108,8 +114,13 @@ public class SaveAndLoad : MonoBehaviour
         data.questStatusTest = QuestsStatus.testQuestStatus;
 
         //Ship Globals
-
+        //data.ship = PlayerStatus.Ship;
         //Inventory Globals
+        data.inventory = new List<GameItem>();
+        foreach(GameItem item in PlayerStatus.Inventory.inventoryList)
+        {
+            data.inventory.Add(item);
+        }
 
         //copy globals into save data here
     }
@@ -144,9 +155,15 @@ public class SaveAndLoad : MonoBehaviour
         QuestsStatus.testQuestStatus = data.questStatusTest;
 
         //Ship Globals
-        
-        //Inventory Globals
+        //PlayerStatus.Ship = data.ship;
 
+        //Inventory Globals
+        Inventory inventory = new Inventory();
+        foreach (GameItem item in data.inventory)
+        {
+            inventory.inventoryList.Add(item);
+        }
+        PlayerStatus.Inventory = inventory;
 
 
         //copy globals to globals from save data here
@@ -159,6 +176,7 @@ public class SerVector3
     public float y;
     public float z;
 }
+
 
 [System.Serializable]
 public class Savedata
@@ -184,4 +202,10 @@ public class Savedata
     //Quest Status Globals
     public int questStatusTest;
 
+    //Ship Globals
+    //public Ship ship;
+
+    //Inventory Globals
+    public List<GameItem> inventory;
+    
 }
