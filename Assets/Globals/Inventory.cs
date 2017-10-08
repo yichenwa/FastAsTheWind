@@ -66,7 +66,7 @@ public class Inventory
         return true;
     }
 
-    public int inventoryPosition(GameItem item)
+    public int InventoryPosition(GameItem item)
     {
         return 0;
     }
@@ -100,7 +100,7 @@ public abstract class GameItem
 
     public abstract string GetItemDescription();
 
-    public abstract int getValue();
+    public abstract int GetValue();
 
     public abstract bool GetStackable();
 
@@ -119,7 +119,8 @@ public class Consumable : GameItem
     public enum Effect
     {
         HEAL,
-        DAMAGE
+        DAMAGE,
+        REPAIR
     }
 
     public readonly string _name;
@@ -155,6 +156,8 @@ public class Consumable : GameItem
             return "Heals";
         else if (_effect == Effect.DAMAGE)
             return "Damages";
+        else if (_effect == Effect.REPAIR)
+            return "Repairs";
         else
             return "Unknown";
     }
@@ -164,7 +167,7 @@ public class Consumable : GameItem
         return _description;
     }
 
-    public override int getValue()
+    public override int GetValue()
     {
         return _value;
     }
@@ -236,7 +239,7 @@ public class CrewWeapon : GameItem
         return _description;
     }
 
-    public override int getValue()
+    public override int GetValue()
     {
         return _value;
     }
@@ -325,7 +328,7 @@ public class ShipWeapon : GameItem
         return _description;
     }
 
-    public override int getValue()
+    public override int GetValue()
     {
         return _value;
     }
@@ -334,7 +337,7 @@ public class ShipWeapon : GameItem
     {
         childAttributes = "Weapon Type: " + GetWeaponType() + "\n" + "Ammunition: " + GetAmmoType() + "\n" + "Damage: " + _damage + "\n" + "Cooldown: " + _cooldown;
         
-        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + getValue() + "\n\n"
+        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + GetValue() + "\n\n"
             + childAttributes + "\n\n" 
             + GetItemDescription();
     }
@@ -404,7 +407,7 @@ public class Ammunition : GameItem
         return _description;
     }
 
-    public override int getValue()
+    public override int GetValue()
     {
         return _value;
     }
@@ -413,7 +416,7 @@ public class Ammunition : GameItem
     {
         childAttributes = "Ammunition Type: " + GetAmmoType() + "\n" + "Hull Damage: x" + _hullDamage + "\n" + "Crew Damage: x" + _crewDamage + "\n" + "Sail Damage: x" + _sailDamage;
 
-        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + getValue() + "\n\n"
+        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + GetValue() + "\n\n"
             + childAttributes + "\n\n"
             + GetItemDescription();
     }

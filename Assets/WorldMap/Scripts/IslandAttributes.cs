@@ -26,6 +26,8 @@ public class IslandAttributes : MonoBehaviour
     public bool specialVisible;
     // private static bool isDiscovered;
 
+    [HideInInspector]
+    public static Inventory shopInventory;
 
     // Use this for initialization
     public virtual void Start()
@@ -35,6 +37,38 @@ public class IslandAttributes : MonoBehaviour
         //isDiscovered = false;
         specialVisible = false;
         transform.position = IslandStats.IslandLocations[islandID];
+
+        //Adding items to inventory
+        shopInventory = new Inventory();
+        shopInventory.AddItem(new CrewWeapon(
+                                            "Sword",                        // name
+                                            "A four-foot long steel blade with a leather-bound hilt. A well made sword, but nothing to brag about.", // description
+                                            50,                             // value
+                                            CrewWeapon.WeaponMaterial.STEEL,// weapon material
+                                            100,                            // current condition
+                                            100,                            // maximum condition
+                                            2));                            // damage
+
+        shopInventory.AddItem(new CrewWeapon(
+                                            "Sword",                        // name
+                                            "A four-foot long steel blade with a leather-bound hilt. A well made sword, but nothing to brag about.", // description
+                                            50,                             // value
+                                            CrewWeapon.WeaponMaterial.STEEL,// weapon material
+                                            100,                            // current condition
+                                            100,                            // maximum condition
+                                            2));                            // damage
+
+        shopInventory.AddItem(new Consumable(
+                                            "Shipswright-in-a-Bottle",                // name
+                                            "Despite its name, this bottle does not in fact contain a small" +
+                                            "man inside who will repair your ship. Inside is a blue, viscous" +
+                                            "fluid, irresistable to merfolk. Upon dumping it in the ocean," +
+                                            "the owner will attract a horde of merfolk who, upon seeing your generous" +
+                                            "gift, will deign to repair any damage your ship may be afflicted with", // description
+                                            75,                              // value
+                                            Consumable.Effect.REPAIR,         // effect
+                                            50),                            // magnitude
+                                            5);                             // quantity
     }
 
     public void Default()
@@ -83,6 +117,11 @@ public class IslandAttributes : MonoBehaviour
         return actions;
     }
 
+    public Inventory GetShop()
+    {
+        return shopInventory;
+    }
+
     //Below are all the virtual classes
 
 
@@ -105,6 +144,7 @@ public class IslandAttributes : MonoBehaviour
     {
         return null;
     }
+
 
     //What the buttons in the visitation scene do, which can be overwritten by a subclass of IslandAttributes
     public virtual void MarketOnClick(MainPanelButton caller)
