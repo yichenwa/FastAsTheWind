@@ -13,7 +13,6 @@ public class ShopPanelManager : MonoBehaviour {
 
         foreach (GameItem thisItem in PlayerStatus.VisitingIsland.GetShop().inventoryList)
         {
-
             if (thisItem.quantity != 0)
             {
                 GameObject button = (GameObject)GameObject.Instantiate(invItemButton); //Make a copy of the base dialogue button
@@ -21,7 +20,9 @@ public class ShopPanelManager : MonoBehaviour {
                 button.transform.SetParent(invLayoutPanel.transform); //Set its parent to the dialogue panel
                 button.tag = "ToDestroy";
 
-                InventoryItemButton inventoryItemButton = button.GetComponent<InventoryItemButton>(); //Get a reference to its script
+                ShopItemButton inventoryItemButton = button.GetComponent<ShopItemButton>(); //Get a reference to its script
+                if (inventoryItemButton == null) Debug.Log("script null");
+                if (thisItem == null) Debug.Log("item null");
                 inventoryItemButton.SetVars(thisItem);
             }
         }

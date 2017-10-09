@@ -19,7 +19,7 @@ public class Inventory
             {
                 inventoryList[index].quantity += quantity;
                 size += quantity;
-                Debug.Log("Added " + quantity.ToString() + " " + item.GetName() + " to player inventory");
+                //Debug.Log("Added " + quantity.ToString() + " " + item.GetName() + " to player inventory");
                 return;
             }
             else if (inventoryList[index].quantity == 0) //If the inventory contains 0 of a non-stackable item, replace it with the new item of the same name
@@ -27,14 +27,14 @@ public class Inventory
                 item.invLoc = index;
                 inventoryList[index] = item;
                 size++;
-                Debug.Log("Added a " + item.GetName() + " to player inventory");
+                //Debug.Log("Added a " + item.GetName() + " to player inventory");
                 return;
             }
             else
             {
                 inventoryList.Insert(inventoryList.Count, item);
                 item.invLoc = inventoryList.Count - 1;
-                Debug.Log("Added a " + item.GetName() + " to player inventory");
+                //Debug.Log("Added a " + item.GetName() + " to player inventory");
                 size++;
             }
         }
@@ -46,11 +46,11 @@ public class Inventory
             {
                 inventoryList[inventoryList.Count-1].quantity = quantity;
                 size += quantity;
-                Debug.Log("Added " + quantity.ToString() + " " + item.GetName() + "(s) to player inventory");
+                //Debug.Log("Added " + quantity.ToString() + " " + item.GetName() + "(s) to player inventory");
             }
             else
             {
-                Debug.Log("Added a " + item.GetName() + " to player inventory");
+                //Debug.Log("Added a " + item.GetName() + " to player inventory");
                 size++;
             }
         }

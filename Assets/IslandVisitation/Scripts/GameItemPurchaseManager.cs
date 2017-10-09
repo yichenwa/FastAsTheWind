@@ -6,22 +6,26 @@ using UnityEngine.UI;
 
 public class GameItemPurchaseManager : MonoBehaviour
 {
-    public GameItem purchasedItem;
 
     public Text itemBuying;
     public Text quantityBuyingText;
-    public Text quantityPossessed;
     public Text goldCount;
     public Text purchaseCost;
 
     public GameObject thisPanel;
-    public GameObject returnPanel;
 
     private int quantityBuying;
     private int purchasePrice;
 
+    [HideInInspector]
+    public GameItem purchasedItem;
+    public GameObject returnPanel;
+    public Text quantityPossessed;
+
     private void OnEnable()
     {
+        if (itemBuying == null) Debug.Log("text null");
+        if (purchasedItem == null) Debug.Log("item null");
         itemBuying.text = "How many " + purchasedItem.GetName() + "s would you like to buy?";
 
         quantityBuying = 0;
@@ -48,9 +52,10 @@ public class GameItemPurchaseManager : MonoBehaviour
 
             double extraItemsUnrounded = disparity / purchasedItem.GetValue();
             int extraItems = (int)Math.Ceiling(extraItemsUnrounded);
+            Debug.Log(extraItems.ToString());
 
             quantityBuying -= extraItems;
-            purchasePrice -= extraItems * purchasedItem.GetValue();
+            purchasePrice = quantityBuying * purchasedItem.GetValue();
         }
 
         if (quantityBuying < 0)
@@ -60,7 +65,7 @@ public class GameItemPurchaseManager : MonoBehaviour
         }
 
         quantityBuyingText.text = quantityBuying.ToString();
-        purchaseCost.text = purchasePrice.ToString();
+        purchaseCost.text = "Cost: " + purchasePrice;
     }
 
     public void Purchase()

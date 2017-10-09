@@ -32,6 +32,7 @@ public class ShopItemButton : MonoBehaviour
 
         GameItemPurchaseManager purchaseScript = purchasePanel.gameObject.GetComponent<GameItemPurchaseManager>();
         purchaseScript.purchasedItem = refItem;
+        purchaseScript.returnPanel = thisPanel;
         purchasePanel.SetActive(true);
         //Once inventory is implemented, find a way to pass the button's stored object to the details panel
     }

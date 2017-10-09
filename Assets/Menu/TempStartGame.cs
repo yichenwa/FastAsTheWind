@@ -31,39 +31,39 @@ public class TempStartGame : MonoBehaviour {
                                           50                                // base sail health
             );
 
-        for (int i = 0; i < 10; i++)
-            PlayerStatus.Inventory.AddItem(new CrewWeapon(
-                                            "Sword",                        // name
-                                            "A four-foot long steel blade with a leather-bound hilt. A well made sword, but nothing to brag about.", // description
-                                            50,                             // value
-                                            CrewWeapon.WeaponMaterial.STEEL,// weapon material
-                                            100,                            // current condition
-                                            100,                            // maximum condition
-                                            2));                            // damage
-        for (int i = 0; i < 4; i++)
-            PlayerStatus.Inventory.AddItem(new ShipWeapon(
-                                            "Basic Cannon",   // name
-                                            "The old and reliable 20mm naval gun, a common weapon used by merchant, pirate, and naval vessels alike.", // description
-                                            50,                             // value
-                                            ShipWeapon.WeaponType.CANNON,   // weapon type
-                                            Ammunition.AmmoType.CANNONBALL, // ammo type
-                                            2,                              // cooldown
-                                            10));                           // damage
-        PlayerStatus.Inventory.AddItem(new Consumable(
-                                            "Health Potion",                // name
-                                            "A blood-red potion, used to magically heal an individual's wounds.", // description
-                                            5,                              // value
-                                            Consumable.Effect.HEAL,         // effect
-                                            10),                            // magnitude
-                                            4);                             // quantity
-        PlayerStatus.Inventory.AddItem(new Ammunition(
-                                            "Explosive Rounds",             // name
-                                            "Filled to the brim with brimstone, these cannonballs violently explode on impact, greviously wounding enemy crew.", // description
-                                            1,                             // value
-                                            Ammunition.AmmoType.CANNONBALL, // weapon material
-                                            1,                              // hull damage multiplier
-                                            3,                              // crew damage multiplier
-                                            1),                             // sail damage multiplier
-                                            100);                           // quantity
+        //for (int i = 0; i < 10; i++)
+        //    PlayerStatus.Inventory.AddItem(new CrewWeapon(
+        //                                    "Sword",                        // name
+        //                                    "A four-foot long steel blade with a leather-bound hilt. A well made sword, but nothing to brag about.", // description
+        //                                    50,                             // value
+        //                                    CrewWeapon.WeaponMaterial.STEEL,// weapon material
+        //                                    100,                            // current condition
+        //                                    100,                            // maximum condition
+        //                                    2));                            // damage
+        //for (int i = 0; i < 4; i++)
+        //    PlayerStatus.Inventory.AddItem(new ShipWeapon(
+        //                                    "Basic Cannon",   // name
+        //                                    "The old and reliable 20mm naval gun, a common weapon used by merchant, pirate, and naval vessels alike.", // description
+        //                                    50,                             // value
+        //                                    ShipWeapon.WeaponType.CANNON,   // weapon type
+        //                                    Ammunition.AmmoType.CANNONBALL, // ammo type
+        //                                    2,                              // cooldown
+        //                                    10));                           // damage
+        //PlayerStatus.Inventory.AddItem(new Consumable(
+        //                                    "Health Potion",                // name
+        //                                    "A blood-red potion, used to magically heal an individual's wounds.", // description
+        //                                    5,                              // value
+        //                                    Consumable.Effect.HEAL,         // effect
+        //                                    10),                            // magnitude
+        //                                    4);                             // quantity
+        //PlayerStatus.Inventory.AddItem(new Ammunition(
+        //                                    "Explosive Rounds",             // name
+        //                                    "Filled to the brim with brimstone, these cannonballs violently explode on impact, greviously wounding enemy crew.", // description
+        //                                    1,                             // value
+        //                                    Ammunition.AmmoType.CANNONBALL, // weapon material
+        //                                    1,                              // hull damage multiplier
+        //                                    3,                              // crew damage multiplier
+        //                                    1),                             // sail damage multiplier
+        //                                    100);                           // quantity
     }
 }

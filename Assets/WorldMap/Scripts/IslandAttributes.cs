@@ -27,7 +27,7 @@ public class IslandAttributes : MonoBehaviour
     // private static bool isDiscovered;
 
     [HideInInspector]
-    public static Inventory shopInventory;
+    public Inventory shopInventory;
 
     // Use this for initialization
     public virtual void Start()
