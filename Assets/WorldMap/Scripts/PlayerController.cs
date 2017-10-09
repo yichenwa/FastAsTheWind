@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour {
             statsPanel.SetActive(true);
         }
 
-        if(Input.GetButton("Save") && !moveLock && (player.velocity.x == 0) && (player.velocity.y == 0))
+        if(Input.GetButton("Cancel") && !moveLock && (player.velocity.x == 0) && (player.velocity.y == 0))
 
         {
             moveLock = true;

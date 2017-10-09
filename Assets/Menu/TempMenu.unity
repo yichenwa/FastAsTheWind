@@ -323,7 +323,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Use WASD Keys To Move\nPress Tab to Bring Up The Menu\nPress C to Bring
+  m_Text: "Use WASD Keys To Move\nPress Tab to Bring Up The Menu\nPress Esc to Bring
     Up The Save Menu \n"
 --- !u!222 &415965321
 CanvasRenderer:

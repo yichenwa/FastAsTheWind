@@ -103,6 +103,8 @@ public class SaveAndLoad : MonoBehaviour
             data.islandLocations.Add(Vector3ToSerVector3(v3));
         }
 
+        data.visitedIslands = PlayerStatus.VisitedIslands;
+
         //Enemy Globals
         data.enemyShipHelthMax = EnemyStatus.ShipHealthMax;
         data.enemyShipHealthCurrent = EnemyStatus.ShipHealthCurrent;
@@ -143,6 +145,8 @@ public class SaveAndLoad : MonoBehaviour
         {
             IslandStats.IslandLocations.Add(SerVector3ToVector3(sv3));
         }
+
+        PlayerStatus.VisitedIslands = data.visitedIslands;
 
         //Enemy Globals
         EnemyStatus.ShipHealthMax = data.enemyShipHelthMax;
@@ -191,6 +195,7 @@ public class Savedata
 
     //Island Stat globals
     public List<SerVector3> islandLocations;
+    public ArrayList visitedIslands;
 
     //Enemy Stat Globals
     public int enemyShipHelthMax;
