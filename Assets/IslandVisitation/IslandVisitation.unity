@@ -6219,7 +6219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemBuying: {fileID: 1760408131}
   quantityBuyingText: {fileID: 419471248}
-  goldCount: {fileID: 1973681116}
+  goldCount: {fileID: 2130573041}
   purchaseCost: {fileID: 257714573}
   thisPanel: {fileID: 1475219124}
   returnPanel: {fileID: 0}

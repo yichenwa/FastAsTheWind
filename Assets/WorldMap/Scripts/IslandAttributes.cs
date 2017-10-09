@@ -39,42 +39,9 @@ public class IslandAttributes : MonoBehaviour
         transform.position = IslandStats.IslandLocations[islandID];
 
         //Adding items to inventory
-        shopInventory = new Inventory();
-        shopInventory.AddItem(new CrewWeapon(
-                                            "Sword",                        // name
-                                            "A four-foot long steel blade with a leather-bound hilt. A well made sword, but nothing to brag about.", // description
-                                            50,                             // value
-                                            CrewWeapon.WeaponMaterial.STEEL,// weapon material
-                                            100,                            // current condition
-                                            100,                            // maximum condition
-                                            2));                            // damage
-
-        shopInventory.AddItem(new CrewWeapon(
-                                            "Sword",                        // name
-                                            "A four-foot long steel blade with a leather-bound hilt. A well made sword, but nothing to brag about.", // description
-                                            50,                             // value
-                                            CrewWeapon.WeaponMaterial.STEEL,// weapon material
-                                            100,                            // current condition
-                                            100,                            // maximum condition
-                                            2));                            // damage
-
-        shopInventory.AddItem(new Consumable(
-                                            "Shipswright-in-a-Bottle",                // name
-                                            "Despite its name, this bottle does not in fact contain a small" +
-                                            "man inside who will repair your ship. Inside is a blue, viscous" +
-                                            "fluid, irresistable to merfolk. Upon dumping it in the ocean," +
-                                            "the owner will attract a horde of merfolk who, upon seeing your generous" +
-                                            "gift, will deign to repair any damage your ship may be afflicted with", // description
-                                            75,                              // value
-                                            Consumable.Effect.REPAIR,         // effect
-                                            50),                            // magnitude
-                                            5);                             // quantity
+        ShopSetup();
     }
 
-    public void Default()
-    {
-
-    }
 
     public void SetAttributes(string name, bool blackS, bool gunS, bool tav, bool wardS, bool arch, bool special)
     {
@@ -117,7 +84,7 @@ public class IslandAttributes : MonoBehaviour
         return actions;
     }
 
-    public Inventory GetShop()
+    public Inventory GetShop() //This returns an inventory, because in the future we may want to have shops be depletable
     {
         return shopInventory;
     }
@@ -145,6 +112,27 @@ public class IslandAttributes : MonoBehaviour
         return null;
     }
 
+    public virtual void ShopSetup()
+    {
+        shopInventory = new Inventory();
+
+        shopInventory.AddItem(new CrewWeapon(
+                                            "Sword",                        // name
+                                            "A four-foot long steel blade with a leather-bound hilt. A well made sword, but nothing to brag about.", // description
+                                            50,                             // value
+                                            CrewWeapon.WeaponMaterial.STEEL,// weapon material
+                                            100,                            // current condition
+                                            100,                            // maximum condition
+                                            2));                            // damage
+
+        shopInventory.AddItem(new Consumable(
+                                            "Health Potion",                // name
+                                            "A blood-red potion, used to magically heal an individual's wounds.", // description
+                                            5,                              // value
+                                            Consumable.Effect.HEAL,         // effect
+                                            10),                            // magnitude
+                                            4);                             // quantity
+    }
 
     //What the buttons in the visitation scene do, which can be overwritten by a subclass of IslandAttributes
     public virtual void MarketOnClick(MainPanelButton caller)

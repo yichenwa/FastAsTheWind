@@ -46,15 +46,21 @@ public class GameItemPurchaseManager : MonoBehaviour
 
         purchasePrice = quantityBuying * purchasedItem.GetValue();
 
-        if(purchasePrice > PlayerStatus.GoldCount)
+        //if(purchasePrice > PlayerStatus.GoldCount)
+        //{
+        //    int disparity = purchasePrice - PlayerStatus.GoldCount;
+
+        //    double extraItemsUnrounded = disparity / purchasedItem.GetValue();
+        //    int extraItems = (int)Math.Ceiling(extraItemsUnrounded);
+        //    Debug.Log(extraItems.ToString());
+
+        //    quantityBuying -= extraItems;
+        //    purchasePrice = quantityBuying * purchasedItem.GetValue();
+        //}
+
+        while(purchasePrice > PlayerStatus.GoldCount)
         {
-            int disparity = purchasePrice - PlayerStatus.GoldCount;
-
-            double extraItemsUnrounded = disparity / purchasedItem.GetValue();
-            int extraItems = (int)Math.Ceiling(extraItemsUnrounded);
-            Debug.Log(extraItems.ToString());
-
-            quantityBuying -= extraItems;
+            quantityBuying--;
             purchasePrice = quantityBuying * purchasedItem.GetValue();
         }
 
@@ -71,6 +77,7 @@ public class GameItemPurchaseManager : MonoBehaviour
     public void Purchase()
     {
         PlayerStatus.GoldCount -= purchasePrice;
+        goldCount.text = "Gold: " + PlayerStatus.GoldCount;
 
         for(int i = 0; i < quantityBuying; i++)
         {
