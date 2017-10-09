@@ -72,6 +72,7 @@ public class Inventory
     }
 }
 
+[System.Serializable]
 public abstract class GameItem
 {
     public int id;
@@ -113,6 +114,7 @@ public abstract class GameItem
     public abstract string GetAttributes();
 }
 
+[System.Serializable]
 public class Consumable : GameItem
 {
 
@@ -186,7 +188,7 @@ public class Consumable : GameItem
             + GetItemDescription();
     }
 }
-
+[System.Serializable]
 public class CrewWeapon : GameItem
 {
     public enum WeaponMaterial
@@ -260,6 +262,7 @@ public class CrewWeapon : GameItem
 
 }
 
+[System.Serializable]
 public class ShipWeapon : GameItem
 {
 
@@ -348,6 +351,7 @@ public class ShipWeapon : GameItem
     }
 }
 
+[System.Serializable]
 public class Ammunition : GameItem
 {
     public enum AmmoType
