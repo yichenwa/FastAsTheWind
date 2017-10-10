@@ -5,9 +5,9 @@ using UnityEngine;
 public class SmallCannon : FirstCannon {
 
     public SmallCannon(){
-        weaponName = "Small Cannon";
-        weaponCooldown = 1f;
-        currentCooldown = 0f;
-        weaponAttack = 2f;
+        WeaponName = "Small Cannon";
+        WeaponCooldown = 1f;
+        CurrentCooldown = 0f;
+        WeaponAttack = 2;
     }
 }

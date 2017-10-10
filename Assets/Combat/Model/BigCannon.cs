@@ -6,9 +6,9 @@ public class BigCannon : FirstCannon {
 
     public BigCannon()
     {
-        weaponName = "Big Cannon";
-        weaponCooldown = 5f;
-        currentCooldown = 0f;
-        weaponAttack = 50f;
+        WeaponName = "Big Cannon";
+        WeaponCooldown = 5f;
+        CurrentCooldown = 0f;
+        WeaponAttack = 50;
     }
 }

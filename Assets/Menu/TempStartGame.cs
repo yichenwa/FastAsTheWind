@@ -17,6 +17,8 @@ public class TempStartGame : MonoBehaviour {
         PlayerStatus.HadWeapon = true;
         PlayerStatus.HadMoreWeapon = false;
 
+        PlayerStatus.shipName = "player";
+
         QuestsStatus.testQuestStatus = -1;
 
         IslandStats.IslandLocations = GetComponent<IslandGeneration>().generateIslands();

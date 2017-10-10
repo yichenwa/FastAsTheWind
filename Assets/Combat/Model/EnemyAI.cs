@@ -11,16 +11,16 @@ public class EnemyAI : MonoBehaviour {
 
     void Start () {
         CSM = GameObject.Find("Combat Manager").GetComponent<CombatState>();
-        self = this.gameObject;
-        weapons = self.GetComponents<FirstCannon>();
+        self = this.gameObject;                             //Find the GameObject this is attached to.
+        weapons = self.GetComponents<FirstCannon>();        //Get a list of weapons the GameObject has.
     }
 	
 	void Update () {
-        foreach (FirstCannon weapons in weapons) {
-            if (weapons.canFire()) {
-                weapons.fire();
-                weapons.target(CSM.player[0], "Enemy");
-                weapons.reset();
+        foreach (FirstCannon weapons in weapons) {      //Check each weapon if the weapon can fire. If able, fire at player.
+            if (weapons.CanFire()) {
+                weapons.Fire();
+                weapons.Target(CSM.player[0]);
+                weapons.Reset();
             }
         }
 	}

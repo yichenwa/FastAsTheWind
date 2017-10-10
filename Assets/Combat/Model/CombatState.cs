@@ -19,7 +19,6 @@ public class CombatState : MonoBehaviour {
     public bool combatOver;
     public bool playerWon;
 
-    // Use this for initialization
     void Start () {
         // to get a non-static reference to the ViewScript Object
         UI = (ViewScript)UIScripts.GetComponent("ViewScript");
@@ -45,18 +44,13 @@ public class CombatState : MonoBehaviour {
 
     }
 
-	// Update is called once per frame
 	void Update () {
 
-      //  Debug.Log(actions.Count);
-
-        //Judge if the next attack is from the enemy or player. Kind of bad. Should change. 
         if (actions.Count > 0) {
-            if(actions.Peek().attackerName == "FTL")
+            if (actions.Peek().attackerObject.tag == "Player")
             {
                 PlayerDoDamage(actions.Dequeue());
             }
-
             else EnemyDoDamage(actions.Dequeue());
         }
 
@@ -70,19 +64,17 @@ public class CombatState : MonoBehaviour {
     //Does damage to enemy or player. Destroy target if health is reduced to 0 or less.
     void PlayerDoDamage(Turns input)
     {
-        PlayerShipState test = input.attackerObject.GetComponent<PlayerShipState>();
-        EnemyShipState test2 = input.targetObject.GetComponent<EnemyShipState>();
-        test2.enemy.shipHealth = test2.enemy.shipHealth - input.test.weaponAttack;
-        EnemyStatus.ShipHealthCurrent = (int)test2.enemy.shipHealth;
+        Health enemyHealth = input.targetObject.GetComponent<Health>();
+        enemyHealth.ShipHull = enemyHealth.ShipHull - input.weaponUsed.WeaponAttack;
         PlayerStatus.AmmoCount = PlayerStatus.AmmoCount - 1;
-        input.test.reset();
-        UI.printToCombatLog("The " + test.player.shipName + " dealt " + input.test.weaponAttack.ToString() + " damage to the " + test2.enemy.shipName + "!");
-        if (test2.enemy.shipHealth <= 0)
+        input.weaponUsed.Reset();
+        UI.printToCombatLog("The " + "Player" + " dealt " + input.weaponUsed.WeaponAttack.ToString() + " damage to the " + "Enemy" + "!");
+        if (enemyHealth.ShipHull <= 0)
         {
             Destroy(input.targetObject);
             enemy.Remove(input.targetObject);
             EnemyStatus.ShipHealthCurrent = 0;
-            UI.printToCombatLog("The " + test.player.shipName + " has sunk the " + test2.enemy.shipName + "!");
+            UI.printToCombatLog("The " + "Player" + " has sunk the " + "Enemy" + "!");
             playerWon = true;
             combatOver = true;
         }
@@ -91,17 +83,15 @@ public class CombatState : MonoBehaviour {
 
     void EnemyDoDamage(Turns input)
     {
-        EnemyShipState test = input.attackerObject.GetComponent<EnemyShipState>();
-        PlayerShipState test2 = input.targetObject.GetComponent<PlayerShipState>();
-        test2.player.shipHealth = test2.player.shipHealth - input.test.weaponAttack;
-       
-        UI.printToCombatLog("The " + test.enemy.shipName + " dealt " + input.test.weaponAttack.ToString() + " damage to the " + test2.player.shipName + "!");
-        if (test2.player.shipHealth <= 0)
+        Health playerHealth = input.targetObject.GetComponent<Health>();
+        playerHealth.ShipHull = playerHealth.ShipHull - input.weaponUsed.WeaponAttack;
+        UI.printToCombatLog("The " + "Enemy" + " dealt " + input.weaponUsed.WeaponAttack.ToString() + " damage to the " + "Enemy" + "!");
+        if (playerHealth.ShipHull <= 0)
         {
             Destroy(input.targetObject);
             player.Remove(input.targetObject);
             PlayerStatus.ShipHealthCurrent = 0;
-            UI.printToCombatLog("The " + test.enemy.shipName + " has sunk the " + test2.player.shipName + "!");
+            UI.printToCombatLog("The " + "Enemy" + " has sunk the " + "Player" + "!");
             playerWon = false;
             combatOver = true;
         }

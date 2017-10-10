@@ -5,20 +5,15 @@ using UnityEngine;
 public class FirstCannon : MonoBehaviour
 {
 
-     public string weaponName {get; set;}
-     public float weaponCooldown {get; set;}
-     public float currentCooldown {get; set;}
-     public float weaponAttack {get; set;}
-
-    //The current state the weapon is in.
-    public States currentState;
+    public string WeaponName {get; set;}
+    public float WeaponCooldown {get; set;}
+    public float CurrentCooldown {get; set;}
+    public int WeaponAttack {get; set;}
 
     private CombatState CSM;
-
     private GameObject self;
 
-    //States that the weapon could be in.
-    public enum States
+    public enum States      //The states the weapon can be in.
      {
        PROCESSING,
        WAITING,
@@ -28,32 +23,27 @@ public class FirstCannon : MonoBehaviour
        DEAD
      }
 
+    public States CurrentState;
+
     protected virtual void Start () {
-        // First state where the weapon will count up until it can be used.
-        currentState = States.PROCESSING;
+        CurrentState = States.PROCESSING;
         CSM = GameObject.Find("Combat Manager").GetComponent<CombatState>();
         self = this.gameObject;
     }
 	
 	protected virtual void Update () {
 
-        //Debug.Log(currentState);
-
-        //Switch case for the weapon states.
-        //As long as the weapon is in processing, the current cooldown will count up.
-        //When it reaches the queue state, it will create a action or turn and add it to the queue.
-        switch (currentState)
+        switch (CurrentState)   //Switch between the states. 
         {
             case States.PROCESSING:
-                advanceCooldown();
+                AdvanceCooldown();
                 break;
             case States.WAITING:
-               // fire();
                 break;
             case States.SELECTING:
                 if (CSM.enemy.Count < 0)
                 {
-                    currentState = States.DEAD;
+                    CurrentState = States.DEAD;
                 }
                 break;
             case States.QUEUE:
@@ -65,56 +55,51 @@ public class FirstCannon : MonoBehaviour
         }
     }
 
-    //Will count up until it reaches the weapon cooldown time. When it reaches the cooldown time it will change states.
-    void advanceCooldown()
+    void AdvanceCooldown()  //Advance the cooldown of the weapon until it reached WeaponCooldown. Switch states when it is finished.
     {
-        currentCooldown = currentCooldown + Time.deltaTime;
-        if (currentCooldown >= weaponCooldown)
+        CurrentCooldown = CurrentCooldown + Time.deltaTime;
+        if (CurrentCooldown >= WeaponCooldown)
         {
-            currentState = States.WAITING;
+            CurrentState = States.WAITING;
         }
     }
 
-   virtual public void fire() {
-        if (currentState == States.WAITING) {
-            currentState = States.SELECTING;
-        }
-    }
-
-    virtual public void target(GameObject target, string name) {
-        if (currentState == States.SELECTING) {
-            currentState = States.QUEUE;
-            attackTarget(target, name);
-        }
-    }
-
-    void attackTarget(GameObject target, string name)
+   virtual public void Fire()   //Ready the weapon for fireing.
     {
-        //Create a new "Turn"
-        //Gets attacker Objets and target Objects from Combat State CSM.    
-        Turns basicAttack = new Turns();
-        basicAttack.attackerName = name;
-        basicAttack.attackerObject = self;
-        basicAttack.targetObject = target;
-        basicAttack.test = this;
-        //Add to the attack queue.
+        if (CurrentState == States.WAITING) {
+            CurrentState = States.SELECTING;
+        }
+    }
+
+    virtual public void Target(GameObject target)   //Selects the target for fireing.
+    {
+        if (CurrentState == States.SELECTING) {
+            CurrentState = States.QUEUE;
+            AttackTarget(target);
+        }
+    }
+
+    void AttackTarget(GameObject target)    //Create a new "Turn". Assign attacker,target and weapon used. Add to the attack queue.
+    {
+        Turns basicAttack = new Turns
+        {
+            attackerObject = self,
+            targetObject = target,
+            weaponUsed = this
+        };
+
         CSM.Add(basicAttack);
     }
 
-    virtual public void reset()
+    virtual public void Reset() //Resets the weapon to 0 cooldown.
     {
-        currentCooldown = 0f;
-        currentState = States.PROCESSING;
+        CurrentCooldown = 0;
+        CurrentState = States.PROCESSING;
     }
 
     //tells player ship to make an attack. returns true if attack is made, false if on cooldown 
-    virtual public bool canFire() // returns true if allowed to attack
+    virtual public bool CanFire() // returns true if allowed to attack
     {
-        return (currentState == States.WAITING && PlayerStatus.AmmoCount > 0);
-    }
-
-    virtual public bool canTarget() // returns true if allowed to attack
-    {
-        return (currentState == States.SELECTING && PlayerStatus.AmmoCount > 0);
+        return (CurrentState == States.WAITING && PlayerStatus.AmmoCount > 0);
     }
 }
