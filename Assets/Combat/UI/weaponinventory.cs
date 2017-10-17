@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class weaponinventory : MonoBehaviour
+public class weaponinventory: MonoBehaviour
 {
   
     public GameObject[] inven = new GameObject[12];
@@ -20,6 +20,7 @@ public class weaponinventory : MonoBehaviour
                 InventoryButton[i].image.overrideSprite = item.GetComponent<SpriteRenderer>().sprite;
                 Debug.Log(item.name + "was added");
                 itemAdded = true;
+
                 //item.SendMessage("DoInteraction");
                 break;
             }
