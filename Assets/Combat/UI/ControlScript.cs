@@ -41,6 +41,15 @@ public class ControlScript : MonoBehaviour {
 
     // Update is called once per frame
 	void Update () {
+
+        if (Input.GetKeyDown("space")) {
+            if (Time.timeScale == 0)
+            {
+                Time.timeScale = 1;
+            }
+
+            else Time.timeScale = 0;
+        }
         // TODO: update valid controls (i.e. if out of ammo or on cooldown, disable fire button)
 
         if (weapons.Length > 0 & IsWeaponSelected == false) { ButtonFire0.interactable = weapons[0].CanFire(); } else ButtonFire0.interactable = false;

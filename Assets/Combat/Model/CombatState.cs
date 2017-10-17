@@ -46,6 +46,8 @@ public class CombatState : MonoBehaviour {
 
 	void Update () {
 
+        if (Time.timeScale == 0) { return; }
+
         if (actions.Count > 0) {
             if (actions.Peek().attackerObject.tag == "Player")
             {
@@ -96,4 +98,5 @@ public class CombatState : MonoBehaviour {
             combatOver = true;
         }
     }
+
 }
