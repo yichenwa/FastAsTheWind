@@ -19,7 +19,7 @@ public class Inventory
             {
                 inventoryList[index].quantity += quantity;
                 size += quantity;
-                Debug.Log("Added " + quantity.ToString() + " " + item.GetName() + " to player inventory");
+                //Debug.Log("Added " + quantity.ToString() + " " + item.GetName() + " to player inventory");
                 return;
             }
             else if (inventoryList[index].quantity == 0) //If the inventory contains 0 of a non-stackable item, replace it with the new item of the same name
@@ -27,14 +27,14 @@ public class Inventory
                 item.invLoc = index;
                 inventoryList[index] = item;
                 size++;
-                Debug.Log("Added a " + item.GetName() + " to player inventory");
+                //Debug.Log("Added a " + item.GetName() + " to player inventory");
                 return;
             }
             else
             {
                 inventoryList.Insert(inventoryList.Count, item);
                 item.invLoc = inventoryList.Count - 1;
-                Debug.Log("Added a " + item.GetName() + " to player inventory");
+                //Debug.Log("Added a " + item.GetName() + " to player inventory");
                 size++;
             }
         }
@@ -46,11 +46,11 @@ public class Inventory
             {
                 inventoryList[inventoryList.Count-1].quantity = quantity;
                 size += quantity;
-                Debug.Log("Added " + quantity.ToString() + " " + item.GetName() + "(s) to player inventory");
+                //Debug.Log("Added " + quantity.ToString() + " " + item.GetName() + "(s) to player inventory");
             }
             else
             {
-                Debug.Log("Added a " + item.GetName() + " to player inventory");
+                //Debug.Log("Added a " + item.GetName() + " to player inventory");
                 size++;
             }
         }
@@ -66,7 +66,7 @@ public class Inventory
         return true;
     }
 
-    public int inventoryPosition(GameItem item)
+    public int InventoryPosition(GameItem item)
     {
         return 0;
     }
@@ -101,7 +101,7 @@ public abstract class GameItem
 
     public abstract string GetItemDescription();
 
-    public abstract int getValue();
+    public abstract int GetValue();
 
     public abstract bool GetStackable();
 
@@ -121,7 +121,8 @@ public class Consumable : GameItem
     public enum Effect
     {
         HEAL,
-        DAMAGE
+        DAMAGE,
+        REPAIR
     }
 
     public readonly string _name;
@@ -157,6 +158,8 @@ public class Consumable : GameItem
             return "Heals";
         else if (_effect == Effect.DAMAGE)
             return "Damages";
+        else if (_effect == Effect.REPAIR)
+            return "Repairs";
         else
             return "Unknown";
     }
@@ -166,7 +169,7 @@ public class Consumable : GameItem
         return _description;
     }
 
-    public override int getValue()
+    public override int GetValue()
     {
         return _value;
     }
@@ -238,7 +241,7 @@ public class CrewWeapon : GameItem
         return _description;
     }
 
-    public override int getValue()
+    public override int GetValue()
     {
         return _value;
     }
@@ -328,7 +331,7 @@ public class ShipWeapon : GameItem
         return _description;
     }
 
-    public override int getValue()
+    public override int GetValue()
     {
         return _value;
     }
@@ -337,7 +340,7 @@ public class ShipWeapon : GameItem
     {
         childAttributes = "Weapon Type: " + GetWeaponType() + "\n" + "Ammunition: " + GetAmmoType() + "\n" + "Damage: " + _damage + "\n" + "Cooldown: " + _cooldown;
         
-        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + getValue() + "\n\n"
+        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + GetValue() + "\n\n"
             + childAttributes + "\n\n" 
             + GetItemDescription();
     }
@@ -408,7 +411,7 @@ public class Ammunition : GameItem
         return _description;
     }
 
-    public override int getValue()
+    public override int GetValue()
     {
         return _value;
     }
@@ -417,7 +420,7 @@ public class Ammunition : GameItem
     {
         childAttributes = "Ammunition Type: " + GetAmmoType() + "\n" + "Hull Damage: x" + _hullDamage + "\n" + "Crew Damage: x" + _crewDamage + "\n" + "Sail Damage: x" + _sailDamage;
 
-        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + getValue() + "\n\n"
+        return "Name: " + GetName() + "\n" + stackableString() + "Classification: " + GetItemType() + "\n" + "Value: " + GetValue() + "\n\n"
             + childAttributes + "\n\n"
             + GetItemDescription();
     }
