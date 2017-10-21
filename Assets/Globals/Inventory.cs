@@ -62,7 +62,7 @@ public class Inventory
             return false;
 
         item.quantity--;
-        size--;
+size--;
         return true;
     }
 
@@ -93,6 +93,11 @@ public abstract class GameItem
     public void Drop()
     {
         PlayerStatus.Inventory.RemoveItem(this);
+    }
+
+    public GameItem CreateInstance()
+    {
+        return (GameItem)this.MemberwiseClone();
     }
 
     public abstract string GetName();
