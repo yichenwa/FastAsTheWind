@@ -41,14 +41,14 @@ public class TempStartGame : MonoBehaviour {
         //                                    100,                            // maximum condition
         //                                    2));                            // damage
         //for (int i = 0; i < 4; i++)
-        //    PlayerStatus.Inventory.AddItem(new ShipWeapon(
-        //                                    "Basic Cannon",   // name
-        //                                    "The old and reliable 20mm naval gun, a common weapon used by merchant, pirate, and naval vessels alike.", // description
-        //                                    50,                             // value
-        //                                    ShipWeapon.WeaponType.CANNON,   // weapon type
-        //                                    Ammunition.AmmoType.CANNONBALL, // ammo type
-        //                                    2,                              // cooldown
-        //                                    10));                           // damage
+        for (int i = 0; i < 4; i++) PlayerStatus.Inventory.AddItem(new ShipWeapon(
+                                        "Basic Cannon",   // name
+                                        "The old and reliable 20mm naval gun, a common weapon used by merchant, pirate, and naval vessels alike.", // description
+                                        50,                             // value
+                                        ShipWeapon.WeaponType.CANNON,   // weapon type
+                                        Ammunition.AmmoType.CANNONBALL, // ammo type
+                                        2,                              // cooldown
+                                        10));                           // damage
         //PlayerStatus.Inventory.AddItem(new Consumable(
         //                                    "Health Potion",                // name
         //                                    "A blood-red potion, used to magically heal an individual's wounds.", // description
